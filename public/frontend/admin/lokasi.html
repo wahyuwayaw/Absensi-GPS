@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin | Lokasi & Radius</title>
+  <link rel="stylesheet" href="../assets/css/av-ui.css">
+  <link rel="stylesheet" href="../assets/css/mobile-responsive.css">
+  <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
+  <link rel="stylesheet" href="../assets/css/admin-consistent.css"></head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+            <button class="mobile-sidebar-close" id="closeSidebar">×</button>
+        </div>
+        <nav class="mobile-sidebar-nav">
+            <button class="btn-nav" onclick="location.href='index.html'">Dashboard</button>
+            <button class="btn-nav" onclick="location.href='absensi.html'">Absensi</button>
+            <button class="btn-nav" onclick="location.href='rekap.html'">Rekap Bulanan</button>
+            <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+            <button class="btn-nav" onclick="location.href='karyawan.html'">Karyawan</button>
+            <button class="btn-nav active" onclick="location.href='lokasi.html'">Lokasi & Radius</button>
+            <button class="btn-nav" onclick="location.href='payroll.html'">Penggajian</button>
+            <button class="btn-nav" onclick="location.href='settings.html'">Pengaturan</button>
+            <button class="btn-nav" id="btnLogout">Keluar</button>
+        </nav>
+    </div>
+    <div class="header topbar">
+        <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+        <button class="hamburger-menu" id="hamburgerMenu"><span></span><span></span><span></span></button>
+<div class="navlinks">
+            <button class="btn-nav" onclick="location.href='index.html'">Dashboard</button>
+            <button class="btn-nav" onclick="location.href='absensi.html'">Absensi</button>
+            <button class="btn-nav" onclick="location.href='rekap.html'">Rekap Bulanan</button>
+            <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+            <button class="btn-nav" onclick="location.href='karyawan.html'">Karyawan</button>
+            <button class="btn-nav active" onclick="location.href='lokasi.html'">Lokasi & Radius</button>
+            <button class="btn-nav" onclick="location.href='payroll.html'">Penggajian</button>
+            <button class="btn-nav" onclick="location.href='settings.html'">Pengaturan</button>
+            <button class="btn-nav" id="btnLogout">Keluar</button>
+        </div>
+    </div>
+    
+    <div class="container admin-container">
+    
+    <div class="row">
+        <div class="col-6">
+            <div class="card admin-card">
+                <h3>Pengaturan Lokasi Kantor</h3>
+                <form id="formLokasi">
+                    <div class="form-group">
+                        <label for="lat">Latitude</label>
+                        <input class="input" name="lat" id="lat" type="number" step="any" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lng">Longitude</label>
+                        <input class="input" name="lng" id="lng" type="number" step="any" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="radius">Radius Absensi (Meter)</label>
+                        <input class="input" name="radius" id="radius" type="number" min="1" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-mt-20">Simpan Lokasi</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="col-6">
+             <div class="card admin-card">
+                <h3>Peta Lokasi</h3>
+                <p class="small">Koordinat saat ini: <span id="currentLoc">-</span></p>
+                <div id="mapArea" class="map-area">
+                    <p class="td-small-muted">[Area Peta]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+<script src="../assets/js/common.js"></script>
+<script src="../assets/js/hamburger-menu.js"></script>
+<script src="../assets/js/admin.js"></script>
+<script src="../assets/js/admin-lokasi.js"></script>
+<script src="../assets/js/av-table-pager.js"></script>
+</body>
+</html>

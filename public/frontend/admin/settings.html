@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin | Pengaturan</title>
+  <link rel="stylesheet" href="../assets/css/av-ui.css">
+  <link rel="stylesheet" href="../assets/css/mobile-responsive.css">
+  <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
+  <style>
+    /* Settings Page Custom Styles */
+    .settings-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .settings-card {
+      padding: 24px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .settings-card h3,
+    .settings-card h4 {
+      margin: 0 0 16px 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .settings-card h4 {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    
+    .settings-card p.small {
+      margin: 0 0 20px 0;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    
+    .settings-section {
+      margin-bottom: 32px;
+    }
+    
+    .settings-form-group {
+      margin-bottom: 20px;
+    }
+    
+    .settings-form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+    }
+    
+    .settings-form-group input,
+    .settings-form-group select {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+    
+    .settings-form-group input:focus,
+    .settings-form-group select:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    
+    .settings-form-group small {
+      display: block;
+      margin-top: 6px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+    
+    .settings-btn {
+      padding: 11px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-block;
+      text-align: center;
+    }
+    
+    .settings-btn-primary {
+      background: #3b82f6;
+      color: white;
+    }
+    
+    .settings-btn-primary:hover {
+      background: #2563eb;
+    }
+    
+    .settings-btn-danger {
+      background: #ef4444;
+      color: white;
+    }
+    
+    .settings-btn-danger:hover {
+      background: #dc2626;
+    }
+    
+    .settings-btn-outline {
+      background: white;
+      color: #374151;
+      border: 1px solid #d1d5db;
+    }
+    
+    .settings-btn-outline:hover {
+      background: #f9fafb;
+      border-color: #9ca3af;
+    }
+    
+    .settings-btn-full {
+      width: 100%;
+      padding: 12px 24px;
+      font-size: 16px;
+    }
+    
+    .settings-heading {
+      margin: 0 0 12px 0;
+      font-size: 24px;
+      font-weight: 700;
+      color: #111827;
+    }
+    
+    .settings-subheading {
+      margin: 40px 0 20px 0;
+      font-size: 20px;
+      font-weight: 600;
+      color: #111827;
+    }
+    
+    .settings-description {
+      margin: 0 0 24px 0;
+      font-size: 14px;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    #healthStatus {
+      margin-top: 16px;
+      padding: 12px;
+      background: #f9fafb;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: 'Courier New', monospace;
+      display: none;
+      border: 1px solid #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+            <button class="mobile-sidebar-close" id="closeSidebar">×</button>
+        </div>
+        <nav class="mobile-sidebar-nav">
+            <button class="btn-nav" onclick="location.href='index.html'">Dashboard</button>
+            <button class="btn-nav" onclick="location.href='absensi.html'">Absensi</button>
+            <button class="btn-nav" onclick="location.href='rekap.html'">Rekap Bulanan</button>
+            <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+            <button class="btn-nav" onclick="location.href='karyawan.html'">Karyawan</button>
+            <button class="btn-nav" onclick="location.href='lokasi.html'">Lokasi & Radius</button>
+            <button class="btn-nav" onclick="location.href='payroll.html'">Penggajian</button>
+            <button class="btn-nav active" onclick="location.href='settings.html'">Pengaturan</button>
+            <button class="btn-nav" id="btnLogout">Keluar</button>
+        </nav>
+    </div>
+    <div class="header topbar">
+        <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+        <button class="hamburger-menu" id="hamburgerMenu"><span></span><span></span><span></span></button>
+<div class="navlinks">
+            <button class="btn-nav" onclick="location.href='index.html'">Dashboard</button>
+            <button class="btn-nav" onclick="location.href='absensi.html'">Absensi</button>
+            <button class="btn-nav" onclick="location.href='rekap.html'">Rekap Bulanan</button>
+            <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+            <button class="btn-nav" onclick="location.href='karyawan.html'">Karyawan</button>
+            <button class="btn-nav" onclick="location.href='lokasi.html'">Lokasi & Radius</button>
+            <button class="btn-nav" onclick="location.href='payroll.html'">Penggajian</button>
+            <button class="btn-nav active" onclick="location.href='settings.html'">Pengaturan</button>
+            <button class="btn-nav" id="btnLogout">Keluar</button>
+        </div>
+    </div>
+    
+    <div class="container settings-container">
+    
+    <h2 class="settings-heading">⚙️ Pengaturan Sistem</h2>
+
+    <!-- Profil Admin -->
+    <div class="row settings-section">
+        <div class="col-6">
+            <div class="card settings-card">
+                <h3>👤 Profil Admin</h3>
+                <form id="formAdminProfile">
+                    <div class="settings-form-group">
+                        <label for="adminNamaInput">Nama</label>
+                        <input name="nama" id="adminNamaInput" required>
+                    </div>
+                    <div class="settings-form-group">
+                        <label for="adminUsernameInput">Username</label>
+                        <input name="username" id="adminUsernameInput" required>
+                    </div>
+                    <button type="submit" class="settings-btn settings-btn-primary">💾 Simpan Profil</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="col-6">
+            <div class="card settings-card">
+                <h3>🔒 Ganti Password</h3>
+                <p class="small td-small-muted">Password baru minimal 6 karakter</p>
+                <form id="formAdminPassword">
+                    <div class="settings-form-group">
+                        <label>Password Lama</label>
+                        <input name="current" type="password" required>
+                    </div>
+                    <div class="settings-form-group">
+                        <label>Password Baru</label>
+                        <input name="new" type="password" required minlength="6" placeholder="Minimal 6 karakter">
+                    </div>
+                    <div class="settings-form-group">
+                        <label>Konfirmasi Password Baru</label>
+                        <input name="confirm" type="password" required minlength="6" placeholder="Ulangi password baru">
+                    </div>
+                    <button type="submit" class="settings-btn settings-btn-danger">🔑 Ubah Password</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pengaturan Penggajian -->
+    <h3 class="settings-subheading">💰 Pengaturan Sistem Penggajian</h3>
+    <p class="settings-description">Atur potongan, bonus, dan gaji default untuk sistem payroll</p>
+    
+    <form id="formPayrollSettings">
+        <!-- Potongan Keterlambatan -->
+        <div class="row settings-section">
+            <div class="col-12">
+                <div class="card settings-card">
+                    <h4 style="color: #EF4444;">📉 Potongan Keterlambatan</h4>
+                    <p class="small td-small-muted" style="margin-bottom: 16px;">
+                        <strong>Catatan:</strong> Potongan "Tidak Masuk (Telat >1 Jam)" dihitung otomatis berdasarkan Gaji Per Hari karyawan. 
+                        Rumus: <code>Gaji Pokok ÷ 30 hari × Jumlah Tidak Masuk</code>
+                    </p>
+                    <div class="form-grid">
+                        <div class="settings-form-group">
+                            <label for="potonganTelat15">Telat 15 Menit</label>
+                            <input type="number" id="potonganTelat15" name="potongan_telat_15" min="0" step="1000" required placeholder="20000">
+                            <small>Potongan untuk keterlambatan 1-15 menit</small>
+                        </div>
+                        <div class="settings-form-group">
+                            <label for="potonganTelat30">Telat 30 Menit</label>
+                            <input type="number" id="potonganTelat30" name="potongan_telat_30" min="0" step="1000" required placeholder="35000">
+                            <small>Potongan untuk keterlambatan 15-60 menit</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bonus Lembur -->
+        <div class="row settings-section">
+            <div class="col-12">
+                <div class="card settings-card">
+                    <h4 style="color: #10B981;">📈 Bonus Lembur</h4>
+                    <div class="form-grid">
+                        <div class="settings-form-group">
+                            <label for="bonusLemburPerjam">Bonus Per Jam</label>
+                            <input type="number" id="bonusLemburPerjam" name="bonus_lembur_perjam" min="0" step="1000" required placeholder="50000">
+                            <small>Bonus untuk setiap jam lembur</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gaji Default -->
+        <div class="row settings-section">
+            <div class="col-12">
+                <div class="card settings-card">
+                    <h4 style="color: #3B82F6;">💵 Gaji Default</h4>
+                    <div class="form-grid">
+                        <div class="settings-form-group">
+                            <label for="gajiDefaultStaff">Staff / Karyawan</label>
+                            <input type="number" id="gajiDefaultStaff" name="gaji_default_staff" min="0" step="100000" required placeholder="2000000">
+                            <small>Gaji pokok default untuk staff</small>
+                        </div>
+                        <div class="settings-form-group">
+                            <label for="gajiDefaultKepalaCabang">Kepala Cabang</label>
+                            <input type="number" id="gajiDefaultKepalaCabang" name="gaji_default_kepala_cabang" min="0" step="100000" required placeholder="2500000">
+                            <small>Gaji pokok default untuk kepala cabang</small>
+                        </div>
+                        <div class="settings-form-group">
+                            <label for="tanggalGajianDefault">Tanggal Gajian</label>
+                            <input type="number" id="tanggalGajianDefault" name="tanggal_gajian_default" min="1" max="31" required placeholder="25">
+                            <small>Tanggal gajian default (1-31)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tombol Simpan -->
+        <div class="row settings-section">
+            <div class="col-12">
+                <button type="submit" class="settings-btn settings-btn-primary settings-btn-full">💾 Simpan Semua Pengaturan Gaji</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- System Tools -->
+    <h3 class="settings-subheading">🛠️ Alat Sistem</h3>
+    
+    <div class="row settings-section">
+        <div class="col-6">
+            <div class="card settings-card">
+                <h3>🔧 Kelola Sesi</h3>
+                <p class="small td-small-muted">Logout semua perangkat dan hapus semua sesi aktif</p>
+                <button class="settings-btn settings-btn-danger" id="btnLogoutAll">🚪 Logout Semua Sesi</button>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card settings-card">
+                <h3>💚 Health Check</h3>
+                <p class="small td-small-muted">Periksa status kesehatan server dan koneksi database</p>
+                <button class="settings-btn settings-btn-outline" id="btnHealthCheck">🔍 Cek Status Server</button>
+                <div id="healthStatus"></div>
+            </div>
+        </div>
+    </div>
+  </div>
+<script src="../assets/js/common.js"></script>
+<script src="../assets/js/hamburger-menu.js"></script>
+<script src="../assets/js/admin.js"></script>
+<script src="../assets/js/admin-settings.js"></script>
+<script src="../assets/js/av-table-pager.js"></script>
+</body>
+</html>

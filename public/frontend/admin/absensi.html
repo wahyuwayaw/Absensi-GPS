@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin | Absensi</title>
+  <link rel="stylesheet" href="../assets/css/av-ui.css">
+  <link rel="stylesheet" href="../assets/css/mobile-responsive.css">
+  <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
+  <link rel="stylesheet" href="../assets/css/admin-consistent.css"></head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+            <button class="mobile-sidebar-close" id="closeSidebar">×</button>
+        </div>
+        <nav class="mobile-sidebar-nav">
+            <button class="btn-nav" onclick="location.href='index.html'">Dashboard</button>
+            <button class="btn-nav active" onclick="location.href='absensi.html'">Absensi</button>
+            <button class="btn-nav" onclick="location.href='rekap.html'">Rekap Bulanan</button>
+            <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+            <button class="btn-nav" onclick="location.href='karyawan.html'">Karyawan</button>
+            <button class="btn-nav" onclick="location.href='lokasi.html'">Lokasi & Radius</button>
+            <button class="btn-nav" onclick="location.href='payroll.html'">Penggajian</button>
+            <button class="btn-nav" onclick="location.href='settings.html'">Pengaturan</button>
+            <button class="btn-nav" id="btnLogout">Keluar</button>
+        </nav>
+    </div>
+    <div class="header topbar">
+        <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+        <button class="hamburger-menu" id="hamburgerMenu"><span></span><span></span><span></span></button>
+        <div class="navlinks">
+            <button class="btn-nav" onclick="location.href='index.html'">Dashboard</button>
+            <button class="btn-nav active" onclick="location.href='absensi.html'">Absensi</button>
+            <button class="btn-nav" onclick="location.href='rekap.html'">Rekap Bulanan</button>
+            <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+            <button class="btn-nav" onclick="location.href='karyawan.html'">Karyawan</button>
+            <button class="btn-nav" onclick="location.href='lokasi.html'">Lokasi & Radius</button>
+            <button class="btn-nav" onclick="location.href='payroll.html'">Penggajian</button>
+            <button class="btn-nav" onclick="location.href='settings.html'">Pengaturan</button>
+            <button class="btn-nav" id="btnLogout">Keluar</button>
+        </div>
+    </div>
+    
+    <div class="container admin-container">
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card admin-card">
+                <h3>Laporan Absensi Harian</h3>
+                <div class="filter-controls">
+                    <input class="input" type="date" id="dateFrom" placeholder="Dari Tanggal">
+                    <input class="input" type="date" id="dateTo" placeholder="Sampai Tanggal">
+                    <input class="input" placeholder="Cari NIP/Nama..." id="searchAbsensi">
+                    <button class="admin-btn admin-btn-primary" id="btnFilter">Filter</button>
+                    <button class="admin-btn admin-btn-outline" id="btnExportCsv">CSV</button>
+                    <button class="admin-btn admin-btn-outline" id="btnExportPdf">PDF</button>
+                    <button class="admin-btn admin-btn-outline" id="btnExportExcel">Excel</button>
+                </div>
+                
+                <div class="av-table-wrap">
+                <table class="av-table" id="tblAbsensi" data-paginate="true">
+                    <thead>
+                        <tr><th>Tanggal</th><th>NIP</th><th>Nama</th><th>Masuk</th><th>Pulang</th><th>Status</th><th>Bukti Masuk</th><th>Bukti Pulang</th><th>Telat (m)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="7" class="td-text-center td-small-muted">Memuat data absensi...</td></tr>
+                    </tbody>
+                </table>
+                </div>
+                <div id="paginationAbsensi" class="pagination-wrapper"></div>
+            </div>
+        </div>
+    </div>
+  </div>
+<script src="../assets/js/common.js"></script>
+<script src="../assets/js/hamburger-menu.js"></script>
+<script src="../assets/js/admin-absensi.js"></script>
+<script src="../assets/js/av-table-pager.js"></script>
+</body>
+</html>

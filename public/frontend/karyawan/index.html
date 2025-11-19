@@ -1,0 +1,330 @@
+<!doctype html><html lang="id"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dashboard Karyawan</title>
+  <link rel="stylesheet" href="../assets/css/av-ui.css">
+  <link rel="stylesheet" href="../assets/css/mobile-responsive.css">
+  <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
+  <link rel="stylesheet" href="../assets/css/karyawan-consistent.css">
+  <style>
+    .digital-clock {
+        font-size: 4rem; /* Large font size for the clock */
+        font-weight: 700;
+        text-align: center;
+        margin: var(--space-4xl) 0; /* Top and bottom margin */
+        color: var(--text);
+    }
+    .attendance-actions {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-md);
+        margin-bottom: var(--space-4xl);
+    }
+    .status-card {
+        text-align: center;
+        padding: var(--space-xl);
+    }
+    .status-card .hdr {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: var(--space-sm);
+    }
+    .status-card .body {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary);
+    }
+    .map-placeholder {
+        background-color: var(--card-2);
+        height: 150px;
+        border-radius: var(--radius);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-top: var(--space-md);
+    }
+    /* Minimal header styles (copied from profile.html for consistency) */
+    .minimal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 56px;
+        padding: var(--space-md) var(--space-4xl);
+        border-bottom: 1px solid var(--line);
+        background: var(--card);
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    .minimal-header .logo {
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+        font-weight: 700;
+        font-size: 16px;
+        color: var(--text);
+    }
+    .minimal-header .logo .dot {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        background: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: #fff;
+    }
+    .user-avatar-menu {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+    }
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 18px;
+    }
+    .user-avatar-dropdown {
+        display: none;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        background-color: var(--card);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        min-width: 180px;
+        z-index: 101;
+        overflow: hidden;
+    }
+    .user-avatar-dropdown.show {
+        display: block;
+    }
+    .user-avatar-dropdown button {
+        display: block;
+        width: 100%;
+        padding: var(--space-md) var(--space-xl);
+        text-align: left;
+        background: none;
+        border: none;
+        color: var(--text);
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+    .user-avatar-dropdown button:hover {
+        background-color: var(--card-2);
+    }
+    .user-avatar-dropdown button:last-child {
+        color: var(--danger);
+    }
+
+    /* Custom grid for smaller cards */
+    .grid-col-stack {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-5xl); /* Increased gap */
+    }
+    .card-half-width {
+        /* This will be handled by the flex-direction: column and gap */
+    }
+
+    /* Dashboard specific responsive */
+    @media (max-width: 768px) {
+        .digital-clock {
+            font-size: 2.5rem;
+            margin: var(--space-2xl) 0;
+        }
+        .attendance-actions {
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+        .attendance-actions .karyawan-btn {
+            width: 100%;
+        }
+        .av-table-responsive {
+            font-size: 12px;
+        }
+        .av-table-responsive th,
+        .av-table-responsive td {
+            padding: 8px 6px;
+        }
+        .av-table-responsive thead th {
+            font-size: 11px;
+        }
+        .grid {
+            grid-template-columns: 1fr !important;
+        }
+        .form-grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
+    @media (max-width: 480px) {
+        .digital-clock {
+            font-size: 2rem;
+            margin: var(--space-xl) 0;
+        }
+        .status-card .hdr {
+            font-size: 1rem;
+        }
+        .status-card .body {
+            font-size: 1.5rem;
+        }
+        .av-table-responsive {
+            font-size: 11px;
+        }
+        .av-table-responsive th,
+        .av-table-responsive td {
+            padding: 6px 4px;
+        }
+        .minimal-header {
+            padding: var(--space-md) var(--space-lg);
+        }
+    }
+  </style>
+  </head><body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+            <button class="mobile-sidebar-close" id="closeSidebar">×</button>
+        </div>
+        <nav class="mobile-sidebar-nav">
+            <button class="btn-nav active" onclick="location.href='index.html'">Dashboard</button>
+            <button class="btn-nav" onclick="location.href='absensi.html'">Absensi</button>
+            <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+            <button class="btn-nav" onclick="location.href='profile.html'">Profil</button>
+            <button class="btn-nav" id="btnLogout">Keluar</button>
+        </nav>
+    </div>
+    <div class="minimal-header">
+        <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+        <button class="hamburger-menu" id="hamburgerMenu"><span></span><span></span><span></span></button>
+<div class="user-avatar-menu">
+            <div class="user-avatar" id="userAvatar"></div>
+            <div class="user-avatar-dropdown" id="userAvatarDropdown">
+                <button onclick="location.href='absensi.html'">Absensi</button>
+                <button onclick="location.href='permohonan.html'">Permohonan</button>
+                <button onclick="location.href='profile.html'">Profil</button>
+                <button id="btnLogout">Keluar</button>
+            </div>
+        </div>
+    </div>
+  
+  <div class="container karyawan-container">
+    <div class="digital-clock" id="digitalClock">00:00:00</div>
+
+    <div class="attendance-actions">
+        <button class="karyawan-btn karyawan-btn-primary" id="btnCheckin">Check In</button>
+        <button class="karyawan-btn karyawan-btn-danger" id="btnCheckout">Check Out</button>
+    </div>
+
+    <div class="card karyawan-card status-card">
+        <div class="hdr">Status Hari Ini</div>
+        <div class="body" id="statusHariIni">Memuat...</div>
+    </div>
+
+    <div class="grid g-3 grid-mt-16">
+      <div class="card karyawan-card card-2"> <!-- Riwayat Absensi Terbaru -->
+        <div class="hdr"><strong>Riwayat Absensi Terbaru</strong><div class="spacer"></div><a class="btn btn-ghost" href="absensi.html">Lihat Semua</a></div>
+        <div class="body">
+          <table class="av-table av-table-responsive" id="tblRiwayatTerbaru">
+            <thead><tr><th>Tanggal</th><th>Jam Masuk</th><th>Jam Pulang</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Riwayat Gaji (muncul hanya H-1, H, H+1) -->
+      <div class="card karyawan-card card-2" id="cardRiwayatGaji" style="display:none;">
+        <div class="hdr"><strong>Riwayat Gaji</strong></div>
+        <div class="body">
+          <table class="av-table av-table-responsive" id="tblRiwayatGaji">
+            <thead>
+              <tr>
+                <th>Bulan/Tahun</th>
+                <th>Gaji Pokok</th>
+                <th>Potongan</th>
+                <th>Bonus Lembur</th>
+                <th>Total Gaji</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="grid-col-stack"> <!-- Wrapper for Lokasi & Radius and Riwayat Permohonan -->
+        <div class="card karyawan-card card-2 card-half-width"> <!-- Lokasi & Radius -->
+          <div class="hdr"><strong>Lokasi & Radius</strong></div>
+          <div class="body">
+              <div id="mapKaryawan" style="width:100%;height:300px;border-radius:8px;background:#f0f0f0;"></div>
+              <p class="small mt-10" id="statusLokasi">Memuat lokasi kantor...</p>
+          </div>
+        </div>
+        <div class="card karyawan-card card-2 card-half-width"> <!-- Riwayat Permohonan Terbaru -->
+            <div class="hdr"><strong>Riwayat Permohonan Terbaru</strong><div class="spacer"></div><a class="btn btn-ghost" href="permohonan.html">Lihat Semua</a></div>
+            <div class="body">
+                <table class="av-table" id="tblRiwayatPermohonanTerbaru">
+                    <thead><tr><th>Tipe</th><th>Status</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+
+      <div class="card karyawan-card card-2"> <!-- Ajukan Permohonan (Form) -->
+        <div class="hdr"><strong>✉️ Ajukan Permohonan</strong></div>
+        <div class="body">
+            <form id="formPermohonanDashboard">
+                <div class="form-group">
+                    <label for="tipePermohonanDashboard">Tipe Permohonan</label>
+                    <select id="tipePermohonanDashboard" class="input" required>
+                        <option value="">Pilih Tipe</option>
+                        <option value="izin">Izin</option>
+                        <option value="cuti">Cuti</option>
+                        <option value="lembur">Lembur</option>
+                        <option value="sakit">Sakit</option>
+                    </select>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="tanggalMulaiDashboard">Tanggal Mulai</label>
+                        <input type="date" id="tanggalMulaiDashboard" class="input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tanggalSelesaiDashboard">Tanggal Selesai (opsional)</label>
+                        <input type="date" id="tanggalSelesaiDashboard" class="input">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="alasanPermohonanDashboard">Alasan</label>
+                    <textarea id="alasanPermohonanDashboard" class="input" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="buktiPermohonanDashboard">Bukti (opsional, gambar/pdf)</label>
+                    <input type="file" id="buktiPermohonanDashboard" class="input">
+                </div>
+                <div class="flex-justify-end" style="margin-top: 20px;">
+                    <button type="submit" class="karyawan-btn karyawan-btn-primary">📤 Kirim Permohonan</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    <script src="../assets/js/common.js"></script>
+    <script src="../assets/js/hamburger-menu.js"></script>
+    <script src="../assets/js/karyawan-index.js"></script>
+    </body></html>

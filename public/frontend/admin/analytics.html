@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dashboard Analytics | Admin</title>
+  <link rel="stylesheet" href="../assets/css/av-ui.css">
+  <link rel="stylesheet" href="../assets/css/mobile-responsive.css">
+  <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
+  <link rel="stylesheet" href="../assets/css/admin-consistent.css">
+  <style>
+    .chart-container {
+      position: relative;
+      height: 300px;
+      margin-top: 16px;
+    }
+    .kpi-card {
+      text-align: center;
+      padding: 20px;
+    }
+    .kpi-card .kpi-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #111827;
+      margin: 8px 0;
+    }
+    .kpi-card .kpi-label {
+      font-size: 14px;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .kpi-card.success .kpi-value { color: #10b981; }
+    .kpi-card.danger .kpi-value { color: #ef4444; }
+    .kpi-card.warning .kpi-value { color: #f59e0b; }
+    .kpi-card.info .kpi-value { color: #3b82f6; }
+    
+    .filter-bar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 24px;
+      padding: 16px;
+      background: #f9fafb;
+      border-radius: 8px;
+    }
+    .filter-bar label {
+      font-weight: 500;
+      color: #374151;
+    }
+    .filter-bar select {
+      padding: 8px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Mobile Overlay & Sidebar -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <div class="mobile-sidebar" id="mobileSidebar">
+    <div class="mobile-sidebar-header">
+      <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+      <button class="mobile-sidebar-close" id="closeSidebar">×</button>
+    </div>
+    <nav class="mobile-sidebar-nav">
+      <button class="btn-nav" onclick="location.href='index.html'">Dashboard</button>
+      <button class="btn-nav active" onclick="location.href='analytics.html'">Analytics</button>
+      <button class="btn-nav" onclick="location.href='absensi.html'">Absensi</button>
+      <button class="btn-nav" onclick="location.href='rekap.html'">Rekap Bulanan</button>
+      <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+      <button class="btn-nav" onclick="location.href='karyawan.html'">Karyawan</button>
+      <button class="btn-nav" onclick="location.href='lokasi.html'">Lokasi & Radius</button>
+      <button class="btn-nav" onclick="location.href='payroll.html'">Penggajian</button>
+      <button class="btn-nav" onclick="location.href='settings.html'">Pengaturan</button>
+      <button class="btn-nav" id="btnLogout">Keluar</button>
+    </nav>
+  </div>
+
+  <!-- Desktop Header -->
+  <div class="header topbar">
+    <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+    <button class="hamburger-menu" id="hamburgerMenu"><span></span><span></span><span></span></button>
+    <div class="navlinks">
+      <button class="btn-nav" onclick="location.href='index.html'">Dashboard</button>
+      <button class="btn-nav active" onclick="location.href='analytics.html'">Analytics</button>
+      <button class="btn-nav" onclick="location.href='absensi.html'">Absensi</button>
+      <button class="btn-nav" onclick="location.href='rekap.html'">Rekap Bulanan</button>
+      <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+      <button class="btn-nav" onclick="location.href='karyawan.html'">Karyawan</button>
+      <button class="btn-nav" onclick="location.href='lokasi.html'">Lokasi & Radius</button>
+      <button class="btn-nav" onclick="location.href='payroll.html'">Penggajian</button>
+      <button class="btn-nav" onclick="location.href='settings.html'">Pengaturan</button>
+      <button class="btn-nav" id="btnLogout">Keluar</button>
+    </div>
+  </div>
+
+  <div class="container admin-container">
+    <h2 class="page-heading">📊 Dashboard Analytics</h2>
+    
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <label>Periode:</label>
+      <select id="analyticsMonth">
+        <option value="1">Januari</option>
+        <option value="2">Februari</option>
+        <option value="3">Maret</option>
+        <option value="4">April</option>
+        <option value="5">Mei</option>
+        <option value="6">Juni</option>
+        <option value="7">Juli</option>
+        <option value="8">Agustus</option>
+        <option value="9">September</option>
+        <option value="10">Oktober</option>
+        <option value="11">November</option>
+        <option value="12">Desember</option>
+      </select>
+      <select id="analyticsYear">
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+      </select>
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="row admin-section">
+      <div class="col-3">
+        <div class="card admin-card kpi-card">
+          <div class="kpi-label">Total Karyawan</div>
+          <div class="kpi-value" id="totalKaryawan">0</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card admin-card kpi-card success">
+          <div class="kpi-label">Hadir Hari Ini</div>
+          <div class="kpi-value" id="hadirHariIni">0 / 0</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card admin-card kpi-card danger">
+          <div class="kpi-label">Tidak Hadir Hari Ini</div>
+          <div class="kpi-value" id="tidakHadirHariIni">0</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card admin-card kpi-card warning">
+          <div class="kpi-label">Tingkat Kehadiran</div>
+          <div class="kpi-value" id="kehadiranRate">0%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second Row KPIs -->
+    <div class="row admin-section">
+      <div class="col-3">
+        <div class="card admin-card kpi-card success">
+          <div class="kpi-label">Hadir Bulan Ini</div>
+          <div class="kpi-value" id="hadirBulanIni">0</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card admin-card kpi-card warning">
+          <div class="kpi-label">Telat Bulan Ini</div>
+          <div class="kpi-value" id="telatBulanIni">0</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card admin-card kpi-card info">
+          <div class="kpi-label">Cuti/Izin Bulan Ini</div>
+          <div class="kpi-value" id="cutiIzinBulanIni">0</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card admin-card kpi-card info">
+          <div class="kpi-label">Lembur Bulan Ini</div>
+          <div class="kpi-value" id="jamLemburBulanIni">0 jam</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="row admin-section">
+      <div class="col-8">
+        <div class="card admin-card">
+          <h3>Tren Kehadiran 12 Bulan Terakhir</h3>
+          <div class="chart-container">
+            <canvas id="trendChart"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card admin-card">
+          <h3>Top 10 Karyawan Telat</h3>
+          <div style="max-height: 300px; overflow-y: auto; margin-top: 16px;">
+            <table class="admin-table" id="tblTopLatest">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>NIP</th>
+                  <th>Nama</th>
+                  <th>Jabatan</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="5" style="text-align:center;">Memuat data...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Department & Payroll -->
+    <div class="row admin-section">
+      <div class="col-6">
+        <div class="card admin-card">
+          <h3>Statistik per Departemen</h3>
+          <div class="chart-container">
+            <canvas id="departmentChart"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card admin-card">
+          <h3>Ringkasan Penggajian</h3>
+          <div style="margin-top: 16px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div style="padding: 12px; background: #f9fafb; border-radius: 6px;">
+                <div style="font-size: 12px; color: #6b7280; margin-bottom: 4px;">Karyawan Diproses</div>
+                <div style="font-size: 18px; font-weight: 600;" id="payrollProcessed">0 karyawan</div>
+              </div>
+              <div style="padding: 12px; background: #f9fafb; border-radius: 6px;">
+                <div style="font-size: 12px; color: #6b7280; margin-bottom: 4px;">Total Gaji Pokok</div>
+                <div style="font-size: 18px; font-weight: 600; color: #10b981;" id="payrollGajiPokok">Rp 0</div>
+              </div>
+              <div style="padding: 12px; background: #f9fafb; border-radius: 6px;">
+                <div style="font-size: 12px; color: #6b7280; margin-bottom: 4px;">Total Potongan</div>
+                <div style="font-size: 18px; font-weight: 600; color: #ef4444;" id="payrollPotongan">Rp 0</div>
+              </div>
+              <div style="padding: 12px; background: #f9fafb; border-radius: 6px;">
+                <div style="font-size: 12px; color: #6b7280; margin-bottom: 4px;">Total Bonus Lembur</div>
+                <div style="font-size: 18px; font-weight: 600; color: #3b82f6;" id="payrollBonus">Rp 0</div>
+              </div>
+            </div>
+            <div style="margin-top: 16px; padding: 16px; background: #ecfdf5; border: 2px solid #10b981; border-radius: 8px; text-align: center;">
+              <div style="font-size: 14px; color: #065f46; margin-bottom: 4px;">Total Gaji Bersih</div>
+              <div style="font-size: 24px; font-weight: 700; color: #059669;" id="payrollTotal">Rp 0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/hamburger-menu.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="../assets/js/admin-dashboard-analytics.js"></script>
+</body>
+</html>

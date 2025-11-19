@@ -1,0 +1,136 @@
+<!doctype html><html lang="id"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Login | Absence Verified</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Role selection handled by inline JavaScript styles for maximum specificity */
+    /* This ensures no CSS conflicts with .btn-ghost styles */
+  </style>
+  </head><body>
+  <div class="center-wrap">
+    <div class="card login-card">
+                <div class="body card-body-login">        <div class="text-center-mb-14">
+          <div class="logo-lg brand logo-center">
+            <div class="logo">AV</div><div>ABSENCE <span style="color:#77b8ff">VERIFIED</span></div>
+          </div>
+          <h2 class="h2-login-margin">Masuk</h2>
+          <div class="small">Pilih peran & masukkan kredensial</div>
+        </div>
+  
+        <div class="grid grid-gap-10">
+          <div class="flex-gap-10">
+            <label class="btn btn-ghost btn-ghost-flex-center role-admin" data-role="admin">
+              <input type="radio" name="role" value="admin" hidden> Admin
+            </label>
+            <label class="btn btn-ghost btn-ghost-flex-center role-karyawan" data-role="karyawan">
+              <input type="radio" name="role" value="karyawan" hidden> Karyawan
+            </label>
+          </div>
+  
+          <input id="username" class="inp" placeholder="Username / NIP">
+          <input id="password" type="password" class="inp" placeholder="Kata sandi">
+  
+          <button id="btnLogin" class="btn btn-primary">Masuk</button>
+          <button id="btnFace" class="btn">Masuk dengan Wajah</button>
+          <div class="small small-text-center-mt-6">© 2025 Absence Verified</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/login.js"></script>
+  <script>
+    // Role selection color toggle with inline styles for guaranteed override
+    function updateRoleStyles() {
+      const adminLabel = document.querySelector('label[data-role="admin"]');
+      const karyawanLabel = document.querySelector('label[data-role="karyawan"]');
+      const adminRadio = document.querySelector('input[value="admin"]');
+      const karyawanRadio = document.querySelector('input[value="karyawan"]');
+      
+      // Reset all to inactive (gray)
+      [adminLabel, karyawanLabel].forEach(label => {
+        if (label) {
+          label.style.background = 'transparent';
+          label.style.borderColor = '#233047';
+          label.style.color = '#aab0bb';
+        }
+      });
+      
+      // Apply active style based on checked radio
+      if (adminRadio && adminRadio.checked && adminLabel) {
+        adminLabel.style.background = '#2d7dff';
+        adminLabel.style.borderColor = '#2d7dff';
+        adminLabel.style.color = 'white';
+        console.log('Admin active - blue applied');
+      }
+      
+      if (karyawanRadio && karyawanRadio.checked && karyawanLabel) {
+        karyawanLabel.style.background = '#22c55e';
+        karyawanLabel.style.borderColor = '#22c55e';
+        karyawanLabel.style.color = 'white';
+        console.log('Karyawan active - green applied');
+      }
+    }
+    
+    // Listen for changes
+    document.querySelectorAll('input[name="role"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        console.log('Role changed to:', this.value);
+        updateRoleStyles();
+      });
+    });
+    
+    // Add hover effects
+    const adminLabel = document.querySelector('label[data-role="admin"]');
+    const karyawanLabel = document.querySelector('label[data-role="karyawan"]');
+    
+    if (adminLabel) {
+      adminLabel.addEventListener('mouseenter', function() {
+        const radio = this.querySelector('input[value="admin"]');
+        if (!radio.checked) {
+          this.style.borderColor = '#2d7dff';
+          this.style.color = '#2d7dff';
+          this.style.background = 'rgba(45, 125, 255, 0.05)';
+        }
+      });
+      adminLabel.addEventListener('mouseleave', function() {
+        const radio = this.querySelector('input[value="admin"]');
+        if (!radio.checked) {
+          this.style.borderColor = '#233047';
+          this.style.color = '#aab0bb';
+          this.style.background = 'transparent';
+        }
+      });
+    }
+    
+    if (karyawanLabel) {
+      karyawanLabel.addEventListener('mouseenter', function() {
+        const radio = this.querySelector('input[value="karyawan"]');
+        if (!radio.checked) {
+          this.style.borderColor = '#22c55e';
+          this.style.color = '#22c55e';
+          this.style.background = 'rgba(34, 197, 94, 0.05)';
+        }
+      });
+      karyawanLabel.addEventListener('mouseleave', function() {
+        const radio = this.querySelector('input[value="karyawan"]');
+        if (!radio.checked) {
+          this.style.borderColor = '#233047';
+          this.style.color = '#aab0bb';
+          this.style.background = 'transparent';
+        }
+      });
+    }
+    
+    // Set initial state - all gray (nothing selected)
+    [adminLabel, karyawanLabel].forEach(label => {
+      if (label) {
+        label.style.background = 'transparent';
+        label.style.borderColor = '#233047';
+        label.style.color = '#aab0bb';
+      }
+    });
+    console.log('Initial state: Both buttons gray (no selection)');
+  </script>
+  </body></html>

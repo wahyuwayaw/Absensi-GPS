@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin | Karyawan</title>
+  <link rel="stylesheet" href="../assets/css/av-ui.css">
+  <link rel="stylesheet" href="../assets/css/mobile-responsive.css">
+  <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
+  <link rel="stylesheet" href="../assets/css/admin-consistent.css"></head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+            <button class="mobile-sidebar-close" id="closeSidebar">×</button>
+        </div>
+        <nav class="mobile-sidebar-nav">
+            <button class="btn-nav" onclick="location.href='index.html'">Dashboard</button>
+            <button class="btn-nav" onclick="location.href='absensi.html'">Absensi</button>
+            <button class="btn-nav" onclick="location.href='rekap.html'">Rekap Bulanan</button>
+            <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+            <button class="btn-nav active" onclick="location.href='karyawan.html'">Karyawan</button>
+            <button class="btn-nav" onclick="location.href='lokasi.html'">Lokasi & Radius</button>
+            <button class="btn-nav" onclick="location.href='payroll.html'">Penggajian</button>
+            <button class="btn-nav" onclick="location.href='settings.html'">Pengaturan</button>
+            <button class="btn-nav" id="btnLogout">Keluar</button>
+        </nav>
+    </div>
+    <div class="header topbar">
+        <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+        <button class="hamburger-menu" id="hamburgerMenu"><span></span><span></span><span></span></button>
+<div class="navlinks">
+            <button class="btn-nav" onclick="location.href='index.html'">Dashboard</button>
+            <button class="btn-nav" onclick="location.href='absensi.html'">Absensi</button>
+            <button class="btn-nav" onclick="location.href='rekap.html'">Rekap Bulanan</button>
+            <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+            <button class="btn-nav active" onclick="location.href='karyawan.html'">Karyawan</button>
+            <button class="btn-nav" onclick="location.href='lokasi.html'">Lokasi & Radius</button>
+            <button class="btn-nav" onclick="location.href='payroll.html'">Penggajian</button>
+            <button class="btn-nav" onclick="location.href='settings.html'">Pengaturan</button>
+            <button class="btn-nav" id="btnLogout">Keluar</button>
+        </div>
+    </div>
+    
+    <div class="container admin-container">
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card admin-card">
+                <div class="flex-justify-between-align-center-mb-20">
+                    <h3>Daftar Karyawan</h3>
+                    <button class="admin-btn admin-btn-primary" id="btnOpenModalTambahPegawai">+ Tambah Karyawan</button>
+                </div>
+                
+                <input class="input input-width-300-mb-15" placeholder="Cari NIP/Nama..." id="searchInput">
+                
+                <div class="av-table-wrap">
+                <table class="av-table" id="tblKaryawan" data-paginate="true">
+                    <thead>
+                        <tr><th>NIP</th><th>Nama</th><th>Jabatan</th><th>Departemen</th><th>Status</th><th>Aksi</th></tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+                </div>
+                <div id="pagination" class="pagination-wrapper"></div>
+            </div>
+        </div>
+    </div>
+  </div>
+<!-- Modal Tambah/Edit Karyawan -->
+<div id="modalKaryawan" class="modal">
+  <div class="modal-content">
+    <span class="close-button" id="closeModal">&times;</span>
+    <h3 id="modalTitle">Tambah Karyawan</h3>
+    <form id="formKaryawan">
+      <input type="hidden" id="karyawanId">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="nip">NIP</label>
+          <input type="text" id="nip" class="input" required>
+        </div>
+        <div class="form-group">
+          <label for="nama_lengkap">Nama Lengkap</label>
+          <input type="text" id="nama_lengkap" class="input" required>
+        </div>
+        <div class="form-group">
+          <label for="jabatan">Jabatan</label>
+          <input type="text" id="jabatan" class="input" required>
+        </div>
+        <div class="form-group">
+          <label for="departemen">Departemen</label>
+          <input type="text" id="departemen" class="input" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="input">
+        </div>
+        <div class="form-group">
+          <label for="password">Password (opsional)</label>
+          <input type="password" id="password" class="input">
+        </div>
+      </div>
+      <div class="form-group">
+        <small>Kosongkan password jika ingin dibuat otomatis.</small>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="tanggal_gabung">Tanggal Gabung</label>
+          <input type="date" id="tanggal_gabung" class="input">
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select id="status" class="select">
+            <option value="aktif">Aktif</option>
+            <option value="nonaktif">Nonaktif</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="gaji_pokok">Gaji Pokok (Rp)</label>
+          <input type="number" id="gaji_pokok" class="input" min="0" step="100000" placeholder="2000000">
+        </div>
+        <div class="form-group">
+          <label for="tanggal_gajian">Tanggal Gajian (1-31)</label>
+          <input type="number" id="tanggal_gajian" class="input" min="1" max="31" placeholder="25">
+        </div>
+      </div>
+      <div class="flex-justify-end">
+        <button type="button" class="btn btn-secondary" id="btnBatal">Batal</button>
+        <button type="submit" class="admin-btn admin-btn-primary">Simpan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../assets/js/common.js"></script>
+<script src="../assets/js/hamburger-menu.js"></script>
+<script src="../assets/js/admin.js"></script>
+<script src="../assets/js/admin-karyawan.js"></script>
+<script src="../assets/js/av-table-pager.js"></script>
+</body>
+</html>

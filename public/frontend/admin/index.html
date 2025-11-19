@@ -1,0 +1,92 @@
+<!doctype html><html lang="id"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dashboard Admin</title>
+  <link rel="stylesheet" href="../assets/css/av-ui.css">
+  <link rel="stylesheet" href="../assets/css/mobile-responsive.css">
+  <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
+  </head><body>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+            <button class="mobile-sidebar-close" id="closeSidebar">×</button>
+        </div>
+        <nav class="mobile-sidebar-nav">
+            <button class="btn-nav active" onclick="location.href='index.html'">Dashboard</button>
+            <button class="btn-nav" onclick="location.href='absensi.html'">Absensi</button>
+            <button class="btn-nav" onclick="location.href='rekap.html'">Rekap Bulanan</button>
+            <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+            <button class="btn-nav" onclick="location.href='karyawan.html'">Karyawan</button>
+            <button class="btn-nav" onclick="location.href='lokasi.html'">Lokasi & Radius</button>
+            <button class="btn-nav" onclick="location.href='payroll.html'">Penggajian</button>
+            <button class="btn-nav" onclick="location.href='settings.html'">Pengaturan</button>
+            <button class="btn-nav" id="btnLogout">Keluar</button>
+        </nav>
+    </div>
+
+    <!-- Desktop Header -->
+    <div class="header topbar">
+        <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+        <!-- Hamburger Menu (Mobile Only) -->
+        <button class="hamburger-menu" id="hamburgerMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <!-- Desktop Navigation -->
+        <div class="navlinks">
+            <button class="btn-nav active" onclick="location.href='index.html'">Dashboard</button>
+            <button class="btn-nav" onclick="location.href='absensi.html'">Absensi</button>
+            <button class="btn-nav" onclick="location.href='rekap.html'">Rekap Bulanan</button>
+            <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+            <button class="btn-nav" onclick="location.href='karyawan.html'">Karyawan</button>
+            <button class="btn-nav" onclick="location.href='lokasi.html'">Lokasi & Radius</button>
+            <button class="btn-nav" onclick="location.href='payroll.html'">Penggajian</button>
+            <button class="btn-nav" onclick="location.href='settings.html'">Pengaturan</button>
+            <button class="btn-nav" id="btnLogout">Keluar</button>
+        </div>
+    </div>
+  
+  <div class="container">
+    <div class="grid g-3">
+      <!-- KPI Kehadiran -->
+      <div class="card">
+        <div class="hdr"><div class="ic ic-success">✓</div><div>Hadir</div></div>
+        <div class="body kpi"><div class="num" id="kpiHadir">0</div><div class="lbl">Hari ini / total</div></div>
+      </div>
+      <div class="card">
+        <div class="hdr"><div class="ic ic-danger">×</div><div>Absen</div></div>
+        <div class="body kpi"><div class="num" id="kpiAbsen">0</div><div class="lbl">Hari ini</div></div>
+      </div>
+      <div class="card">
+        <div class="hdr"><div class="ic ic-info">⎯</div><div>Cuti</div></div>
+        <div class="body kpi"><div class="num" id="kpiCuti">0</div><div class="lbl">Bulan ini</div></div>
+      </div>
+    </div>
+  
+    <div class="grid g-2 grid-mt-16">
+      <div class="card card-2">
+        <div class="hdr"><strong>Statistik Mingguan</strong><div class="spacer"></div><span class="small">7 hari terakhir</span></div>
+        <div class="body"><div class="chart-wrap"><canvas id="weeklyChart"></canvas></div></div>
+      </div>
+      <div class="card card-2">
+        <div class="hdr"><strong>Notifikasi Pending</strong><div class="spacer"></div><a class="btn btn-ghost" href="permohonan.html">Kelola</a></div>
+        <div class="body">
+          <table class="table" id="tblNotif">
+            <thead><tr><th>Tanggal</th><th>Nama</th><th>Tipe</th><th>Bukti</th><th>Aksi</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    <script src="../assets/js/common.js"></script>
+    <script src="../assets/js/hamburger-menu.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="../assets/js/admin-index.js"></script>
+    <script src="../assets/js/av-table-pager.js"></script>
+    </body></html>

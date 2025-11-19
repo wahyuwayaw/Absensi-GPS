@@ -1,0 +1,864 @@
+/*
+ * Mobile Fixes - Berdasarkan hasil/ubah.txt
+ * File ini memperbaiki semua masalah yang disebutkan
+ * Load setelah mobile-responsive.css
+ */
+
+@media (max-width: 767px) {
+    /* ==========================================
+       1. GLOBAL FIXES
+       ========================================== */
+    
+    /* Prevent horizontal overflow */
+    html {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+    
+    body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+    
+    /* Container padding konsisten kiri-kanan */
+    .container {
+        padding: 16px !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+    }
+
+    /* Jarak antar elemen konsisten */
+    .grid {
+        gap: 16px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .card,
+    .form-group,
+    .filter-controls {
+        margin-bottom: 16px !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Card dengan background lebih gelap dan border */
+    .card {
+        background: var(--card) !important;
+        border: 1px solid var(--line) !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        pointer-events: auto !important;
+        overflow: hidden !important; /* Prevent children overflow */
+    }
+
+    .card-2 {
+        background: var(--card-2) !important;
+    }
+
+    /* Heading dengan jarak yang baik */
+    h3 {
+        font-size: 18px !important;
+        margin-bottom: 16px !important;
+        margin-top: 0 !important;
+        font-weight: 700 !important;
+        line-height: 1.4 !important;
+    }
+
+    .card h3 {
+        padding: 16px !important;
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .card .hdr {
+        padding: 16px !important;
+        border-bottom: 1px solid var(--line) !important;
+    }
+
+    .card .body {
+        padding: 16px !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+    }
+
+    /* Card direct children spacing */
+    .card > h3 + .filter-controls {
+        margin-top: 16px !important;
+    }
+
+    .card > * {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Semua width 100% untuk mobile */
+    .input,
+    select,
+    textarea {
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* ==========================================
+       2. FORM FILTER FIXES
+       ========================================== */
+
+    /* Input height konsisten */
+    .input,
+    select,
+    textarea {
+        min-height: 44px !important; /* 44px untuk touch */
+        padding: 12px !important;
+        font-size: 14px !important; /* Readable size */
+        border-radius: 8px !important;
+        margin-bottom: 0 !important; /* Let gap handle spacing */
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Filter controls rapi */
+    .filter-controls {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important; /* Jarak konsisten */
+        padding: 16px !important;
+        background: var(--card-2) !important;
+        border-radius: 8px !important;
+        margin-bottom: 16px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .filter-controls .input,
+    .filter-controls select {
+        width: 100% !important;
+        margin-bottom: 0 !important; /* Gap handles spacing */
+        margin-top: 0 !important;
+    }
+
+    /* Tombol filter full-width */
+    .filter-controls .btn {
+        width: 100% !important;
+        min-height: 44px !important;
+        margin: 0 !important; /* Gap handles all spacing */
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Placeholder tidak menjorok */
+    .input::placeholder,
+    select::placeholder {
+        color: var(--muted) !important;
+        opacity: 0.7 !important;
+    }
+
+    /* ==========================================
+       3. TABEL FIXES
+       ========================================== */
+
+    /* Wrapper dengan scroll horizontal */
+    .av-table-wrap,
+    .table-responsive {
+        overflow-x: auto !important;
+        width: calc(100% + 32px) !important; /* Extend to card edges */
+        max-width: calc(100% + 32px) !important;
+        margin: 16px -16px !important; /* Negative margin to reach card edges */
+        padding: 0 16px !important; /* Inner padding for content */
+        -webkit-overflow-scrolling: touch !important;
+        border-radius: 0 !important; /* No radius when full width */
+        background: var(--card-2) !important;
+        border-top: 1px solid var(--line) !important;
+        border-bottom: 1px solid var(--line) !important;
+        border-left: none !important;
+        border-right: none !important;
+        box-sizing: border-box !important;
+        position: relative !important;
+    }
+
+    /* Table dengan width minimum */
+    .av-table,
+    .table {
+        min-width: 100% !important; /* Use natural width */
+        width: 100% !important;
+        border-collapse: separate !important;
+        border-spacing: 0 !important;
+        margin: 0 !important;
+        table-layout: auto !important; /* Let columns size naturally */
+    }
+
+    /* Header tabel lebih kecil */
+    .av-table thead th,
+    .table thead th {
+        font-size: 11px !important; /* Slightly bigger for readability */
+        font-weight: 700 !important;
+        padding: 10px 8px !important; /* Better padding */
+        background: var(--card) !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 10 !important;
+        border-bottom: 2px solid var(--line) !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.3px !important;
+        white-space: nowrap !important;
+        color: var(--muted) !important;
+        vertical-align: middle !important;
+    }
+
+    /* Isi tabel readable */
+    .av-table tbody td,
+    .table tbody td {
+        font-size: 12px !important; /* Readable size */
+        padding: 10px 8px !important; /* Better padding */
+        line-height: 1.4 !important;
+        white-space: nowrap !important;
+        border-bottom: 1px solid rgba(35, 48, 71, 0.5) !important;
+        color: var(--text) !important;
+        vertical-align: middle !important;
+    }
+
+    /* Garis pemisah antar baris */
+    .av-table tbody tr,
+    .table tbody tr {
+        border-bottom: 1px solid rgba(35, 48, 71, 0.5) !important;
+    }
+
+    .av-table tbody tr:last-child,
+    .table tbody tr:last-child {
+        border-bottom: none !important;
+    }
+
+    .av-table tbody tr:last-child td,
+    .table tbody tr:last-child td {
+        border-bottom: none !important;
+    }
+
+    /* Zebra striping untuk readability */
+    .av-table tbody tr:nth-child(odd),
+    .table tbody tr:nth-child(odd) {
+        background-color: rgba(255, 255, 255, 0.02) !important;
+    }
+
+    .av-table tbody tr:nth-child(even),
+    .table tbody tr:nth-child(even) {
+        background-color: rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* ==========================================
+       4. BUTTON FIXES
+       ========================================== */
+
+    /* Button full-width di mobile */
+    .btn {
+        width: 100% !important;
+        min-height: 44px !important;
+        padding: 12px 16px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        border-radius: 8px !important;
+        margin: 0 !important; /* No margin, use gap */
+        pointer-events: auto !important; /* Ensure clickable */
+        cursor: pointer !important;
+        box-sizing: border-box !important;
+        display: block !important;
+        border: 1px solid rgba(255,255,255,0.1) !important; /* Visible border */
+    }
+    
+    /* Make button colors more visible */
+    .btn-primary {
+        background: var(--primary) !important;
+        color: white !important;
+    }
+    
+    .btn-danger {
+        background: var(--danger) !important;
+        color: white !important;
+    }
+    
+    .btn-success {
+        background: var(--success) !important;
+        color: white !important;
+    }
+
+    /* Button groups dengan jarak */
+    .flex-justify-end,
+    .flex-justify-between-align-center-mb-20 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        align-items: stretch !important;
+        width: 100% !important;
+    }
+
+    .flex-justify-end .btn,
+    .flex-justify-between-align-center-mb-20 .btn {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    /* Button dalam card header */
+    .card .hdr .btn {
+        width: auto !important;
+        min-width: 120px !important;
+        flex: 0 1 auto !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Button action di tabel (Setujui/Tolak) */
+    .av-table td .btn,
+    .table td .btn,
+    .td-flex-gap-6 .btn {
+        width: auto !important;
+        min-width: 70px !important; /* Readable width */
+        margin: 0 4px 4px 0 !important;
+        font-size: 11px !important; /* Readable font */
+        padding: 6px 10px !important; /* Better padding */
+        min-height: 32px !important; /* Touch-friendly */
+        display: inline-block !important;
+        white-space: nowrap !important;
+        line-height: 1.3 !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important; /* Make visible */
+    }
+
+    .td-flex-gap-6 {
+        display: flex !important;
+        flex-direction: column !important; /* Stack vertical */
+        flex-wrap: nowrap !important;
+        gap: 6px !important;
+        justify-content: flex-start !important;
+        align-items: stretch !important;
+        width: 100% !important;
+    }
+    
+    .td-flex-gap-6 .btn {
+        width: 100% !important; /* Full width in column */
+        margin: 0 !important;
+    }
+
+    /* Tombol Tambah (+ Tambah Karyawan, dll) */
+    .btn-primary {
+        width: 100% !important;
+        margin-bottom: 16px !important;
+    }
+
+    /* Button outline/ghost */
+    .btn-outline,
+    .btn-ghost {
+        width: 100% !important;
+        margin-bottom: 12px !important;
+    }
+
+    /* ==========================================
+       5. PAGINATION FIXES
+       ========================================== */
+
+    /* Pagination di tengah dengan margin */
+    .pagination-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 12px !important;
+        margin-top: 20px !important;
+        padding: 16px !important;
+        background: var(--card) !important;
+        border-radius: 8px !important;
+        width: 100% !important;
+    }
+
+    .pagination {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+    }
+
+    .pagination-info {
+        text-align: center !important;
+        width: 100% !important;
+    }
+
+    /* ==========================================
+       6. INPUT SEARCH FIXES
+       ========================================== */
+
+    /* Search input dengan margin */
+    .filter-controls input[type="text"],
+    .filter-controls input[placeholder*="Cari"],
+    #searchAbsensi,
+    input[placeholder*="search" i] {
+        width: 100% !important;
+        margin-bottom: 12px !important;
+    }
+
+    /* ==========================================
+       7. REKAP & FORM SPECIFIC FIXES
+       ========================================== */
+
+    /* Input bulan/tanggal */
+    input[type="date"],
+    input[type="month"],
+    #month,
+    #dateFrom,
+    #dateTo {
+        width: 100% !important;
+        margin-bottom: 12px !important;
+    }
+
+    /* Box rekap sebagai card */
+    #out,
+    pre {
+        background: var(--card-2) !important;
+        padding: 16px !important;
+        border-radius: 8px !important;
+        border: 1px solid var(--line) !important;
+        margin-top: 16px !important;
+        overflow-x: auto !important;
+    }
+
+    /* Form grid menjadi 1 kolom */
+    .form-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Form group spacing */
+    .form-group {
+        margin-bottom: 16px !important;
+    }
+
+    .form-group label {
+        display: block !important;
+        margin-bottom: 8px !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        color: var(--muted) !important;
+    }
+
+    /* ==========================================
+       8. BUTTON TAMBAH KARYAWAN & SIMILAR
+       ========================================== */
+
+    /* Tombol di header card */
+    .flex-justify-between-align-center-mb-20 {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .flex-justify-between-align-center-mb-20 h3 {
+        margin-bottom: 0 !important;
+    }
+
+    .flex-justify-between-align-center-mb-20 .btn {
+        width: 100% !important;
+    }
+
+    /* ==========================================
+       9. MODAL FIXES
+       ========================================== */
+
+    .modal-content {
+        width: calc(100% - 32px) !important;
+        max-width: none !important;
+        padding: 20px !important;
+        margin: 16px !important;
+    }
+
+    .modal-content h3 {
+        font-size: 18px !important;
+        margin-bottom: 16px !important;
+    }
+
+    /* ==========================================
+       10. UTILITY CLASSES FIXES
+       ========================================== */
+
+    .mt-10,
+    .mt-20 {
+        margin-top: 16px !important;
+    }
+
+    .mb-15,
+    .mb-20 {
+        margin-bottom: 16px !important;
+    }
+
+    .flex-align-end {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+
+    .flex-gap-10-mb-20-align-center,
+    .flex-gap-15-align-end-mb-20 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        margin-bottom: 16px !important;
+    }
+
+    /* Width utilities */
+    .width-200px,
+    .width-150px,
+    .input-width-200-inline,
+    .input-width-300-mb-15 {
+        width: 100% !important;
+    }
+
+    /* ==========================================
+       11. SPECIFIC PAGE FIXES
+       ========================================== */
+
+    /* Dashboard actions (Check In/Out) */
+    .attendance-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .attendance-actions .btn {
+        width: 100% !important;
+    }
+
+    /* Status card */
+    .status-card {
+        padding: 20px !important;
+        text-align: center !important;
+    }
+
+    /* Digital clock */
+    .digital-clock {
+        font-size: 3rem !important;
+        margin: 20px 0 !important;
+    }
+
+    /* Map placeholder */
+    .map-placeholder {
+        height: 150px !important;
+        margin-top: 12px !important;
+    }
+
+    /* ==========================================
+       12. TABLE WRAPPER IMPROVEMENTS
+       ========================================== */
+
+    /* Scroll hint yang jelas */
+    .av-table-wrap::before {
+        content: 'Geser →' !important;
+        position: absolute !important;
+        top: 50% !important;
+        right: 20px !important;
+        transform: translateY(-50%) !important;
+        font-size: 12px !important;
+        font-weight: 700 !important;
+        color: var(--primary) !important;
+        background: rgba(11, 14, 19, 0.95) !important;
+        padding: 6px 12px !important;
+        border-radius: 4px !important;
+        pointer-events: none !important;
+        z-index: 5 !important;
+        opacity: 0.9 !important;
+        line-height: 1 !important;
+        white-space: nowrap !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+    }
+
+    /* Hide scroll hint when scrolled */
+    .av-table-wrap.scrolled::before {
+        opacity: 0 !important;
+        transition: opacity 0.3s ease !important;
+    }
+
+    /* ==========================================
+       13. BADGE & STATUS FIXES
+       ========================================== */
+
+    .badge {
+        font-size: 10px !important; /* Smaller */
+        padding: 3px 8px !important; /* Compact */
+        font-weight: 600 !important;
+        white-space: nowrap !important;
+        display: inline-block !important;
+        line-height: 1.2 !important;
+    }
+
+    /* Compact text in table */
+    .av-table .td-small-muted,
+    .table .td-small-muted {
+        font-size: 11px !important;
+    }
+
+    /* Table columns with smart widths */
+    .av-table td,
+    .table td {
+        max-width: 200px !important; /* Default max width */
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    /* Date column - compact */
+    .av-table td:nth-child(1),
+    .av-table th:nth-child(1) {
+        max-width: 100px !important;
+        min-width: 80px !important;
+    }
+
+    /* Name column - medium */
+    .av-table td:nth-child(2),
+    .av-table th:nth-child(2) {
+        max-width: 150px !important;
+        min-width: 100px !important;
+    }
+
+    /* Type/Status column - compact */
+    .av-table td:nth-child(3),
+    .av-table th:nth-child(3) {
+        max-width: 100px !important;
+        min-width: 80px !important;
+    }
+
+    /* Reason/Notes column - wider */
+    .av-table td:nth-child(4),
+    .av-table th:nth-child(4) {
+        max-width: 200px !important;
+        min-width: 120px !important;
+    }
+
+    /* Action column - no limits, allow buttons */
+    .av-table td:last-child,
+    .av-table th:last-child {
+        max-width: none !important;
+        min-width: auto !important;
+        overflow: visible !important;
+        white-space: normal !important;
+    }
+
+    /* ==========================================
+       14. ROW & COL FIXES
+       ========================================== */
+
+    .row {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+
+    .col-12,
+    .col-6 {
+        grid-column: span 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+
+    /* ==========================================
+       15. SPACING UTILITIES
+       ========================================== */
+
+    /* Remove spacer on mobile */
+    .spacer {
+        display: none !important;
+    }
+
+    /* Consistent margins */
+    .mt-20,
+    .grid-mt-16 {
+        margin-top: 16px !important;
+    }
+
+    /* ==========================================
+       16. BUTTON SPECIFIC FIXES
+       ========================================== */
+
+    /* Export buttons (CSV/PDF) */
+    .btn-outline {
+        background: transparent !important;
+        border: 1px solid var(--primary) !important;
+        color: var(--primary) !important;
+    }
+
+    /* Print button */
+    #btnPrint,
+    button[onclick*="print"] {
+        width: 100% !important;
+        margin-top: 12px !important;
+    }
+
+    /* Clear/Reset buttons */
+    .btn-secondary {
+        width: 100% !important;
+        background: var(--card-2) !important;
+        color: var(--text) !important;
+    }
+
+    /* ==========================================
+       17. FORM SUBMISSION BUTTONS
+       ========================================== */
+
+    /* Button submit di form */
+    form .btn[type="submit"],
+    form button[type="submit"] {
+        width: 100% !important;
+        margin-top: 20px !important;
+        min-height: 48px !important; /* Extra height for primary action */
+        font-size: 15px !important;
+    }
+
+    /* ==========================================
+       18. CARD HEADER WITH BUTTON FIXES
+       ========================================== */
+
+    .card .hdr {
+        flex-wrap: wrap !important;
+        gap: 12px !important;
+    }
+
+    .card .hdr strong {
+        flex: 1 1 100% !important;
+        margin-bottom: 8px !important;
+    }
+
+    .card .hdr .btn-ghost {
+        width: 100% !important;
+        margin-top: 8px !important;
+    }
+
+    /* ==========================================
+       19. SPECIFIC ELEMENT FIXES
+       ========================================== */
+
+    /* Tombol "Lihat Semua" */
+    a[href*="absensi.html"],
+    a[href*="permohonan.html"] {
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+        margin-top: 12px !important;
+        pointer-events: auto !important;
+    }
+
+    /* Ensure all interactive elements are clickable */
+    button,
+    a,
+    input,
+    select,
+    textarea {
+        pointer-events: auto !important;
+        cursor: pointer !important;
+    }
+
+    input,
+    select,
+    textarea {
+        cursor: text !important;
+    }
+
+    /* Input dengan button inline - stack them */
+    .flex-gap-10-mb-20-align-center,
+    .flex-gap-15-align-end-mb-20,
+    .flex-gap-10-mb-15 {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+
+    /* ==========================================
+       20. PRINT & EXPORT BUTTON GROUP
+       ========================================== */
+
+    /* Tombol Print/CSV/PDF berjajar */
+    .filter-controls .btn-outline {
+        width: 100% !important;
+    }
+
+    /* If buttons are in a group */
+    .button-group {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+
+    /* ==========================================
+       21. FINAL TOUCH - ENSURE NO OVERFLOW
+       ========================================== */
+
+    /* Override for table cells to allow natural width */
+    .av-table th,
+    .av-table td,
+    .table th,
+    .table td {
+        max-width: none !important;
+    }
+
+    /* Ensure container doesn't overflow */
+    body {
+        overflow-x: hidden !important;
+    }
+
+    .container {
+        overflow-x: hidden !important;
+    }
+}
+
+/* ==========================================
+   LANDSCAPE MODE SPECIFIC
+   ========================================== */
+
+@media (max-width: 767px) and (orientation: landscape) {
+    .digital-clock {
+        font-size: 2.5rem !important;
+    }
+
+    .card .body {
+        padding: 12px !important;
+    }
+
+    .filter-controls {
+        padding: 12px !important;
+    }
+}
+
+/* ==========================================
+   EXTRA SMALL DEVICES (320-359px)
+   ========================================== */
+
+@media (max-width: 359px) {
+    .container {
+        padding: 0 12px !important; /* Slightly less padding */
+    }
+
+    .card .body {
+        padding: 12px !important;
+    }
+
+    .btn {
+        font-size: 13px !important;
+        padding: 10px 14px !important;
+    }
+
+    .av-table thead th,
+    .table thead th {
+        font-size: 11px !important;
+    }
+
+    .av-table tbody td,
+    .table tbody td {
+        font-size: 12px !important;
+        padding: 8px 10px !important;
+    }
+}

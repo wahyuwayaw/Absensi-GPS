@@ -1,0 +1,943 @@
+/* 
+ * Mobile Responsive CSS - Custom Components
+ * Untuk component-component yang memiliki inline styles di HTML
+ * File ini harus dimuat setelah av-ui.css
+ */
+
+/* ========================================
+   HAMBURGER MENU FOR MOBILE
+   ======================================== */
+
+/* Hamburger Button */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    z-index: 1001;
+}
+
+.hamburger-menu:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--text);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+/* Hamburger Animation when Open */
+.hamburger-menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Mobile Sidebar Menu */
+.mobile-sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100vh;
+    background: var(--card);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+    padding-bottom: 20px;
+}
+
+.mobile-sidebar.active {
+    left: 0;
+}
+
+/* Mobile Sidebar Header */
+.mobile-sidebar-header {
+    padding: var(--space-2xl) var(--space-xl);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    position: sticky;
+    top: 0;
+    background: var(--card);
+    z-index: 10;
+}
+
+.mobile-sidebar-header .logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text);
+    flex: 1;
+}
+
+.mobile-sidebar-header .logo .dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #fff;
+}
+
+.mobile-sidebar-close {
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.mobile-sidebar-close:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Mobile Sidebar Navigation */
+.mobile-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-md);
+    gap: var(--space-xs);
+}
+
+.mobile-sidebar-nav .btn-nav {
+    width: 100%;
+    padding: var(--space-md) var(--space-xl);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--muted);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 15px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mobile-sidebar-nav .btn-nav:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text);
+}
+
+.mobile-sidebar-nav .btn-nav.active {
+    background: rgba(45, 125, 255, 0.15);
+    color: var(--primary);
+}
+
+.mobile-sidebar-nav .btn-nav:last-child {
+    margin-top: var(--space-md);
+    color: var(--danger);
+    border-top: 1px solid var(--line);
+    padding-top: var(--space-xl);
+}
+
+/* Overlay */
+.mobile-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* Don't block clicks when inactive */
+}
+
+.mobile-overlay.active {
+    opacity: 1;
+    pointer-events: auto; /* Enable clicks when active */
+}
+
+/* Show hamburger menu only on mobile */
+@media (max-width: 767px) {
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .mobile-sidebar {
+        display: block;
+    }
+
+    .mobile-overlay {
+        display: block;
+    }
+    
+    /* Hide desktop navigation on mobile */
+    .navlinks,
+    .minimal-header .navlinks {
+        display: none !important;
+    }
+    
+    /* Hide desktop nav buttons on mobile */
+    .topbar .btn-nav:not(.hamburger-menu),
+    .header .btn-nav:not(.hamburger-menu),
+    .minimal-header .btn-nav:not(.hamburger-menu) {
+        display: none !important;
+    }
+
+    /* Hide desktop navbar on mobile */
+    .header.topbar .navlinks {
+        display: none !important;
+    }
+
+    /* Adjust header for hamburger */
+    .header.topbar {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: var(--space-md) var(--space-xl) !important;
+    }
+
+    .header.topbar .logo {
+        font-size: 15px !important;
+    }
+
+    /* For minimal header (profile page) */
+    .minimal-header {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: var(--space-md) var(--space-xl) !important;
+    }
+
+    .minimal-header .user-avatar-menu {
+        flex-direction: row;
+        gap: var(--space-md);
+        width: auto;
+    }
+}
+
+/* ========================================
+   PROFILE PAGE MOBILE RESPONSIVE
+   ======================================== */
+
+@media (max-width: 767px) {
+    /* Segmented Control / Tabs */
+    .segmented-control {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        padding: var(--space-xs) !important;
+        justify-content: stretch !important;
+    }
+
+    .segmented-control button {
+        flex: 1 1 auto !important;
+        min-width: 90px !important;
+        height: 36px !important;
+        padding: 6px 10px !important;
+        font-size: 13px !important;
+    }
+
+    /* Minimal Header */
+    .minimal-header {
+        flex-direction: row !important; /* Keep horizontal */
+        gap: var(--space-sm) !important;
+        padding: var(--space-md) !important;
+        min-height: auto !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    .minimal-header .logo {
+        font-size: 14px !important;
+        flex: 0 0 auto !important;
+    }
+
+    .minimal-header .logo .dot {
+        width: 24px !important;
+        height: 24px !important;
+        font-size: 12px !important;
+    }
+
+    .minimal-header .user-avatar-menu {
+        flex: 0 0 auto !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: var(--space-sm) !important;
+    }
+    
+    /* Ensure hamburger and avatar are visible */
+    .minimal-header .hamburger-menu,
+    .minimal-header .user-avatar {
+        display: flex !important;
+    }
+
+    .user-avatar {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 16px !important;
+    }
+
+    .user-avatar-dropdown {
+        top: 45px !important;
+        right: 0 !important;
+        min-width: 160px !important;
+    }
+
+    .user-avatar-dropdown button {
+        padding: var(--space-sm) var(--space-md) !important;
+        font-size: 13px !important;
+    }
+
+    /* Profile Content Wrapper */
+    .profile-content-wrapper {
+        max-width: 100% !important;
+        margin-top: var(--space-4xl) !important;
+        padding: 0 !important;
+    }
+
+    .profile-page-container {
+        min-height: auto !important;
+        padding: var(--space-2xl) var(--space-md) !important;
+    }
+
+    /* Profile Card */
+    #profilCard,
+    #editDataCard,
+    #gantiPasswordCard {
+        width: 100% !important;
+        padding: var(--space-2xl) !important;
+        border-radius: 12px !important;
+    }
+
+    #profilCard .hdr h3,
+    #editDataCard .hdr h3,
+    #gantiPasswordCard .hdr h3 {
+        font-size: 16px !important;
+    }
+
+    #profilCard .form-group label,
+    #editDataCard .form-group label,
+    #gantiPasswordCard .form-group label {
+        font-size: 12px !important;
+    }
+
+    #profilCard .form-group p {
+        font-size: 14px !important;
+        padding-bottom: var(--space-sm) !important;
+    }
+
+    /* Profile Photo Upload */
+    .profile-photo-upload {
+        margin-bottom: var(--space-2xl) !important;
+        gap: var(--space-sm) !important;
+    }
+
+    .profile-photo-preview {
+        width: 100px !important;
+        height: 100px !important;
+    }
+
+    .profile-photo-preview .initials {
+        font-size: 40px !important;
+    }
+
+    .profile-photo-actions {
+        flex-direction: column;
+        gap: var(--space-xs) !important;
+        width: 100%;
+    }
+
+    .profile-photo-actions button {
+        width: 100%;
+    }
+}
+
+/* ========================================
+   DASHBOARD / INDEX PAGE MOBILE RESPONSIVE
+   ======================================== */
+
+@media (max-width: 767px) {
+    /* Digital Clock */
+    .digital-clock {
+        font-size: 2.5rem !important;
+        margin: var(--space-2xl) 0 !important;
+    }
+
+    /* Attendance Actions */
+    .attendance-actions {
+        flex-direction: column !important;
+        gap: var(--space-sm) !important;
+        margin-bottom: var(--space-2xl) !important;
+    }
+
+    .attendance-actions .btn {
+        width: 100%;
+    }
+
+    /* Status Card */
+    .status-card {
+        padding: var(--space-2xl) !important;
+    }
+
+    .status-card .hdr {
+        font-size: 1rem !important;
+    }
+
+    .status-card .body {
+        font-size: 1.5rem !important;
+    }
+
+    /* Map Placeholder */
+    .map-placeholder {
+        height: 120px !important;
+        font-size: 0.8rem !important;
+    }
+
+    /* Grid Column Stack */
+    .grid-col-stack {
+        gap: var(--space-2xl) !important;
+    }
+
+    /* Dashboard specific cards */
+    .card-half-width {
+        width: 100% !important;
+    }
+}
+
+/* ========================================
+   LOGIN PAGE MOBILE RESPONSIVE
+   ======================================== */
+
+@media (max-width: 767px) {
+    /* Login container adjustments */
+    .login-container {
+        padding: var(--space-2xl) var(--space-md) !important;
+        max-width: 100% !important;
+    }
+
+    .login-card {
+        width: 100% !important;
+        padding: var(--space-2xl) !important;
+    }
+
+    .login-card h2 {
+        font-size: 20px !important;
+    }
+
+    .login-card .input {
+        font-size: 14px !important;
+    }
+}
+
+/* ========================================
+   ADMIN DASHBOARD SPECIFIC
+   ======================================== */
+
+@media (max-width: 767px) {
+    /* Weekly Chart */
+    .chart-wrap canvas {
+        max-height: 180px !important;
+    }
+
+    /* KPI Cards */
+    .kpi .ic {
+        width: 24px !important;
+        height: 24px !important;
+        font-size: 12px !important;
+    }
+
+    /* Notification Table Actions */
+    .td-flex-gap-6 {
+        flex-direction: column !important;
+        gap: 4px !important;
+    }
+
+    .td-flex-gap-6 .btn {
+        width: 100%;
+        font-size: 11px !important;
+        padding: 4px 8px !important;
+    }
+
+    /* Card header with multiple buttons */
+    .card .hdr {
+        flex-wrap: wrap !important;
+    }
+
+    .card .hdr .btn-ghost,
+    .card .hdr .btn {
+        font-size: 11px !important;
+        padding: 6px 10px !important;
+        white-space: nowrap;
+    }
+
+    /* Filter controls with multiple buttons */
+    .filter-controls {
+        flex-wrap: wrap !important;
+        gap: var(--space-sm) !important;
+    }
+
+    .filter-controls .btn {
+        flex: 0 1 auto !important;
+        min-width: 80px !important;
+    }
+
+    .filter-controls .input {
+        flex: 1 1 100% !important;
+        min-width: 100% !important;
+        margin-bottom: var(--space-xs);
+    }
+
+    /* Export buttons group */
+    .filter-controls .btn-outline + .btn-outline {
+        margin-left: 0 !important;
+    }
+}
+
+/* ========================================
+   MODAL IMPROVEMENTS FOR MOBILE
+   ======================================== */
+
+@media (max-width: 767px) {
+    .modal {
+        padding: var(--space-md);
+    }
+
+    .modal-content {
+        width: 100% !important;
+        max-width: none !important;
+        padding: var(--space-2xl) var(--space-md) !important;
+        margin: 0 !important;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .modal-content h3 {
+        font-size: 16px !important;
+        margin-bottom: var(--space-md);
+    }
+
+    .modal .form-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .close-button {
+        top: var(--space-md) !important;
+        right: var(--space-md) !important;
+        font-size: 1.5rem !important;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--card-2);
+        border-radius: 50%;
+    }
+}
+
+/* ========================================
+   TABLE SPECIFIC MOBILE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 767px) {
+    /* Make tables scrollable horizontally */
+    .av-table-wrap {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        overflow-x: auto;
+        position: relative;
+        margin-left: -10px;
+        margin-right: -10px;
+        padding: 0 10px;
+    }
+
+    /* Table wrapper with scroll hint shadow */
+    .av-table-wrap {
+        background: var(--card-2); /* Darker background for better contrast */
+        border-radius: var(--radius);
+        padding: 0; /* Remove default padding */
+    }
+
+    .av-table-wrap::after {
+        content: '→'; /* Add arrow hint */
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        font-size: 20px;
+        color: var(--primary);
+        pointer-events: none;
+        opacity: 0.6;
+        text-shadow: 0 0 8px rgba(0,0,0,0.8);
+    }
+
+    /* Adjust table styling for mobile */
+    .av-table {
+        min-width: 100%; /* Allow natural width */
+        font-size: 13px !important; /* Increased from 11px */
+        display: table;
+        width: auto;
+    }
+
+    .av-table th,
+    .av-table td {
+        padding: 10px 12px !important; /* Increased padding */
+        white-space: nowrap;
+        font-size: 13px !important; /* Increased from 11px */
+        line-height: 1.5 !important;
+    }
+
+    .av-table thead th {
+        font-size: 12px !important; /* Increased from 10px */
+        font-weight: 700 !important;
+        position: sticky;
+        top: 0;
+        background: var(--card) !important;
+        z-index: 10;
+        border-bottom: 2px solid var(--line) !important;
+    }
+
+    /* Compact table for mobile */
+    .table {
+        font-size: 13px !important; /* Increased */
+        min-width: 100%;
+    }
+
+    .table th,
+    .table td {
+        padding: 10px 12px !important; /* Increased */
+        font-size: 13px !important; /* Increased */
+        line-height: 1.5 !important;
+    }
+
+    /* Sticky first column for important tables */
+    .av-table.sticky-first-col thead th:first-child,
+    .av-table.sticky-first-col tbody td:first-child {
+        position: sticky;
+        left: 0;
+        background-color: var(--card);
+        z-index: 5;
+        box-shadow: 2px 0 4px rgba(0,0,0,0.1);
+    }
+
+    /* Show badge text on mobile if too long */
+    .badge {
+        max-width: 120px; /* Increased */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 12px !important; /* Increased from 10px */
+        padding: 4px 10px !important; /* Increased */
+        font-weight: 600 !important;
+    }
+
+    /* Button groups in table cells */
+    .av-table td .btn-group,
+    .td-flex-gap-6 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 6px !important; /* Increased gap */
+        min-width: 120px; /* Increased */
+    }
+
+    .av-table td .btn-group .btn,
+    .td-flex-gap-6 .btn,
+    .av-table .btn-sm {
+        width: 100% !important;
+        font-size: 12px !important; /* Increased from 10px */
+        padding: 8px 12px !important; /* Increased */
+        min-height: 36px !important; /* Increased from 28px */
+        white-space: nowrap;
+        font-weight: 600 !important;
+    }
+
+    /* Action buttons in tables */
+    .av-table td button,
+    .av-table td .btn {
+        font-size: 12px !important; /* Increased from 10px */
+        padding: 8px 12px !important; /* Increased */
+        margin: 3px 0 !important; /* Increased margin */
+        min-height: 36px !important;
+    }
+
+    /* Table text alignment helpers */
+    .td-text-center {
+        text-align: center !important;
+    }
+
+    .td-small-muted {
+        font-size: 12px !important; /* Increased from 10px */
+        color: var(--muted) !important;
+    }
+
+    /* Better contrast for table rows */
+    .av-table tbody tr {
+        border-bottom: 1px solid var(--line) !important;
+    }
+
+    .av-table tbody tr:nth-child(odd) {
+        background-color: rgba(255, 255, 255, 0.03) !important;
+    }
+
+    .av-table tbody tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.01) !important;
+    }
+
+    /* Improve text contrast */
+    .av-table td {
+        color: var(--text) !important;
+    }
+
+    .av-table thead th {
+        color: var(--muted) !important;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* Better spacing between table and pagination */
+    .pagination-wrapper {
+        margin-top: var(--space-4xl) !important;
+        padding: var(--space-md) !important;
+        background: var(--card) !important;
+        border-radius: var(--radius) !important;
+    }
+}
+
+/* ========================================
+   SPECIFIC PAGE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 767px) {
+    /* Riwayat/History Page */
+    body.body-pb-60 {
+        padding-bottom: 40px !important;
+    }
+
+    /* Payroll Page */
+    .pre-wrap {
+        font-size: 12px !important;
+        padding: var(--space-md) !important;
+        overflow-x: auto;
+    }
+
+    /* Settings Page */
+    .input-flex-1 {
+        flex: 1 1 100% !important;
+    }
+
+    /* Filter controls specific adjustments */
+    .flex-gap-10-mb-20-align-center,
+    .flex-gap-15-align-end-mb-20 {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: var(--space-sm) !important;
+    }
+
+    .width-200px,
+    .width-150px,
+    .input-width-200-inline,
+    .input-width-300-mb-15 {
+        width: 100% !important;
+    }
+}
+
+/* ========================================
+   TABLET SPECIFIC ADJUSTMENTS
+   ======================================== */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .segmented-control button {
+        min-width: 100px !important;
+        font-size: 14px !important;
+    }
+
+    .profile-content-wrapper {
+        max-width: 700px !important;
+    }
+
+    #profilCard,
+    #editDataCard,
+    #gantiPasswordCard {
+        width: 100% !important;
+        max-width: 600px !important;
+    }
+
+    .digital-clock {
+        font-size: 3rem !important;
+    }
+}
+
+/* ========================================
+   LANDSCAPE MODE SPECIFIC ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 767px) and (orientation: landscape) {
+    .digital-clock {
+        font-size: 2rem !important;
+        margin: var(--space-md) 0 !important;
+    }
+
+    .status-card {
+        padding: var(--space-md) !important;
+    }
+
+    .chart-wrap {
+        height: 160px !important;
+    }
+
+    .modal-content {
+        max-height: 85vh !important;
+    }
+
+    .profile-photo-preview {
+        width: 80px !important;
+        height: 80px !important;
+    }
+
+    .profile-photo-preview .initials {
+        font-size: 32px !important;
+    }
+}
+
+/* ========================================
+   EXTRA SMALL DEVICES
+   ======================================== */
+
+@media (max-width: 359px) {
+    .segmented-control button {
+        min-width: 70px !important;
+        font-size: 11px !important;
+        padding: 4px 6px !important;
+    }
+
+    .digital-clock {
+        font-size: 2rem !important;
+    }
+
+    .btn {
+        font-size: 12px !important; /* Increased */
+        padding: 8px 10px !important; /* Increased */
+    }
+
+    .av-table {
+        font-size: 12px !important; /* Increased */
+    }
+
+    .av-table th,
+    .av-table td {
+        padding: 8px 10px !important; /* Increased */
+    }
+
+    .badge {
+        font-size: 11px !important; /* Increased */
+        padding: 3px 8px !important; /* Increased */
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY & READABILITY IMPROVEMENTS
+   ======================================== */
+
+@media (max-width: 767px) {
+    /* Larger touch targets for mobile */
+    .btn,
+    .input,
+    select,
+    .btn-nav,
+    .user-avatar {
+        min-height: 44px; /* iOS recommended touch target */
+    }
+
+    /* Better focus indicators on mobile */
+    .btn:focus,
+    .input:focus,
+    select:focus,
+    .btn-nav:focus {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+    }
+
+    /* Prevent zoom on input focus (iOS) */
+    .input,
+    select,
+    textarea {
+        font-size: 16px !important; /* Prevents iOS zoom */
+    }
+
+    /* Improve overall text readability */
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+
+    /* Better line height for readability */
+    .card .body,
+    .av-table td,
+    .form-group {
+        line-height: 1.6 !important;
+    }
+
+    /* Increase contrast for muted text */
+    .muted,
+    .small,
+    .td-small-muted {
+        color: #b8bec9 !important; /* Lighter muted color */
+    }
+
+    /* Make primary elements more visible */
+    .btn-primary {
+        box-shadow: 0 2px 8px rgba(45, 125, 255, 0.4) !important;
+    }
+
+    .btn-danger {
+        box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4) !important;
+    }
+
+    /* Better visual separation */
+    .card {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+        border: 1px solid var(--line) !important;
+    }
+}
+
+/* ========================================
+   PERFORMANCE OPTIMIZATIONS
+   ======================================== */
+
+@media (max-width: 767px) {
+    /* Reduce animations on mobile for better performance */
+    * {
+        animation-duration: 0.15s !important;
+        transition-duration: 0.15s !important;
+    }
+
+    /* Reduce shadows on mobile */
+    .card,
+    .modal-content,
+    .av-table-wrap {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    }
+}

@@ -1,0 +1,404 @@
+<!doctype html><html lang="id"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Karyawan | Profil</title>
+  <link rel="stylesheet" href="../assets/css/av-ui.css">
+  <link rel="stylesheet" href="../assets/css/mobile-responsive.css">
+  <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
+  <link rel="stylesheet" href="../assets/css/karyawan-consistent.css">
+  <style>
+    /* Custom styles for segmented control/tabs */
+    .segmented-control {
+        display: flex;
+        background-color: var(--card-2); /* Darker background for inactive */
+        border-radius: var(--radius); /* 12px */
+        padding: var(--space-sm); /* 8px */
+        margin-bottom: var(--space-4xl); /* 20px */
+        justify-content: center; /* Center horizontally */
+        gap: 12px; /* Gap between buttons */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+    }
+    .segmented-control button {
+        flex: 0 0 auto; /* Don't grow, don't shrink, auto width */
+        min-width: 120px; /* Minimum width for buttons */
+        height: 42px; /* Height 42-48px */
+        padding: var(--space-md) var(--space-xl); /* 10px 14px */
+        border: none;
+        background-color: transparent;
+        color: var(--muted); /* Light gray for inactive text */
+        font-weight: 600; /* Semibold */
+        cursor: pointer;
+        border-radius: 12px; /* 12px radius */
+        transition: all 0.2s ease;
+        font-size: 15px; /* 15-16px */
+    }
+    .segmented-control button.active {
+        background-color: var(--primary); /* Blue solid */
+        color: #fff; /* White text */
+        box-shadow: 0 2px 8px rgba(45, 125, 255, 0.3); /* Subtle shadow for active */
+    }
+    .segmented-control button:hover:not(.active) {
+        background-color: rgba(255, 255, 255, 0.08); /* Lighter hover for inactive */
+        color: var(--text);
+    }
+
+    /* Minimal header styles */
+    .minimal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 56px;
+        padding: var(--space-md) var(--space-4xl);
+        border-bottom: 1px solid var(--line);
+        background: var(--card);
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    .minimal-header .logo {
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+        font-weight: 700;
+        font-size: 16px;
+        color: var(--text);
+    }
+    .minimal-header .logo .dot {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        background: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: #fff;
+    }
+    .user-avatar-menu {
+        position: relative;
+        display: flex; /* To align avatar and back button */
+        align-items: center;
+        gap: var(--space-md);
+    }
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 18px;
+    }
+    .user-avatar-dropdown {
+        display: none;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        background-color: var(--card);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        min-width: 180px;
+        z-index: 101;
+        overflow: hidden;
+    }
+    .user-avatar-dropdown.show {
+        display: block;
+    }
+    .user-avatar-dropdown button {
+        display: block;
+        width: 100%;
+        padding: var(--space-md) var(--space-xl);
+        text-align: left;
+        background: none;
+        border: none;
+        color: var(--text);
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+    .user-avatar-dropdown button:hover {
+        background-color: var(--card-2);
+    }
+    .user-avatar-dropdown button:last-child {
+        color: var(--danger);
+    }
+
+    /* Profile Photo Upload */
+    .profile-photo-upload {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-md);
+        margin-bottom: var(--space-4xl);
+    }
+    .profile-photo-preview {
+        width: 120px; /* 100-120px */
+        height: 120px;
+        border-radius: 50%;
+        background-color: var(--card-2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border: 2px solid var(--primary);
+    }
+    .profile-photo-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .profile-photo-preview .initials {
+        font-size: 48px;
+        font-weight: 700;
+        color: var(--muted);
+    }
+    .profile-photo-actions {
+        display: flex;
+        gap: var(--space-md);
+    }
+
+    /* Custom wrapper for centering profile content */
+    .profile-content-wrapper {
+        max-width: 1000px; /* 1000-1100px */
+        margin: 0 auto;
+        margin-top: 70px; /* 60-80px */
+    }
+
+    /* Specific styling for profile page container to center content vertically */
+    .profile-page-container {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; Removed vertical centering as per margin-top */
+        align-items: center;
+        min-height: calc(100vh - 56px); /* Full viewport height minus header height */
+        padding: var(--space-5xl); /* Ensure padding is maintained */
+    }
+
+    /* Card Profil specific styling */
+    #profilCard {
+        width: 450px; /* 420-480px */
+        box-shadow: var(--shadow);
+        border-radius: 14px; /* 14-16px */
+        padding: var(--space-4xl); /* 16-20px */
+        background-color: var(--card); /* Slightly brighter */
+    }
+    #profilCard .hdr h3 {
+        font-size: 18px; /* 17-18px */
+        font-weight: 600; /* Semibold */
+    }
+    #profilCard .form-group label {
+        font-size: 15px; /* 15-16px */
+        color: var(--muted); /* Secondary text color */
+    }
+    #profilCard .form-group p {
+        font-weight: 600; /* Data important bold */
+        font-size: 16px;
+        margin-top: var(--space-xs); /* Small gap between label and value */
+        padding-bottom: var(--space-md); /* Spacing between data rows */
+        border-bottom: 1px solid var(--line); /* Thin divider */
+    }
+    #profilCard .form-grid {
+        gap: var(--space-lg); /* 12-16px vertical spacing */
+    }
+
+    /* Edit Data Card and Ganti Password Card */
+    #editDataCard, #gantiPasswordCard {
+        box-shadow: var(--shadow);
+        border-radius: 14px;
+        padding: var(--space-4xl);
+        background-color: var(--card);
+    }
+    #editDataCard .hdr h3, #gantiPasswordCard .hdr h3 {
+        font-size: 18px;
+        font-weight: 600;
+    }
+    #editDataCard .form-group label, #gantiPasswordCard .form-group label {
+        font-size: 15px;
+        color: var(--muted);
+    }
+    #editDataCard .input, #gantiPasswordCard .input {
+        height: 40px; /* 36-40px */
+    }
+    #editDataCard .flex-justify-end button, #gantiPasswordCard .flex-justify-end button {
+        height: 40px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .profile-content-wrapper {
+            max-width: 100%;
+            padding: 0 var(--space-md); /* 16px padding */
+        }
+        .segmented-control {
+            overflow-x: auto;
+            justify-content: flex-start;
+        }
+        .segmented-control button {
+            flex-shrink: 0;
+        }
+        .grid.g-2 {
+            grid-template-columns: 1fr; /* Stack cards */
+        }
+        #profilCard, #editDataCard, #gantiPasswordCard {
+            width: 100%;
+        }
+        .profile-photo-upload {
+            margin-bottom: var(--space-xl);
+        }
+    }
+  </style>
+  </head><body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+            <button class="mobile-sidebar-close" id="closeSidebar">×</button>
+        </div>
+        <nav class="mobile-sidebar-nav">
+            <button class="btn-nav" onclick="location.href='index.html'">Dashboard</button>
+            <button class="btn-nav" onclick="location.href='absensi.html'">Absensi</button>
+            <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+            <button class="btn-nav active" onclick="location.href='profile.html'">Profil</button>
+            <button class="btn-nav" id="btnLogout">Keluar</button>
+        </nav>
+    </div>
+    <div class="minimal-header">
+        <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+        <button class="hamburger-menu" id="hamburgerMenu"><span></span><span></span><span></span></button>
+<div class="user-avatar-menu">
+            <button class="btn btn-primary btn-sm" id="btnBackToHome">Kembali ke Home</button>
+            <div class="user-avatar" id="userAvatar"></div>
+            <div class="user-avatar-dropdown" id="userAvatarDropdown">
+                <button id="btnChangePhoto">Ubah Foto Profil</button>
+                <button id="btnChangePasswordDropdown">Ganti Password</button>
+                <button id="btnLogout">Keluar</button>
+            </div>
+        </div>
+    </div>
+  
+  <div class="container profile-page-container">
+    <div class="profile-content-wrapper">
+        <div class="segmented-control">
+            <button class="active" data-tab="profil">Profil</button>
+            <button data-tab="editData">Edit Data</button>
+            <button data-tab="gantiPassword">Ganti Password</button>
+        </div>
+
+        <div class="grid g-2">
+            <!-- Profil Card (Always visible, but content changes based on tab) -->
+            <div class="card" id="profilCard">
+                <div class="hdr"><h3>Profil Karyawan</h3></div>
+                <div class="body">
+                    <div class="profile-photo-upload">
+                        <div class="profile-photo-preview">
+                            <img id="profileImagePreview" src="" alt="Foto Profil" style="display:none;">
+                            <span id="profileInitials" class="initials"></span>
+                        </div>
+                        <div class="profile-photo-actions">
+                            <input type="file" id="photoUploadInput" accept="image/*" style="display:none;">
+                            <button class="karyawan-btn karyawan-btn-primary" id="btnUploadPhoto">Unggah Foto</button>
+                            <button class="btn btn-ghost" id="btnRemovePhoto" style="display:none;">Hapus Foto</button>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>NIP</label>
+                            <p id="viewNip" class="text-lg"></p>
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Lengkap</label>
+                            <p id="viewNamaLengkap" class="text-lg"></p>
+                        </div>
+                        <div class="form-group">
+                            <label>Jabatan</label>
+                            <p id="viewJabatan" class="text-lg"></p>
+                        </div>
+                        <div class="form-group">
+                            <label>Departemen</label>
+                            <p id="viewDepartemen" class="text-lg"></p>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <p id="viewEmail" class="text-lg"></p>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <p id="viewStatus" class="text-lg"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Data Card -->
+            <div class="card" id="editDataCard" style="display:none;">
+                <div class="hdr"><h3>Edit Data Karyawan</h3></div>
+                <div class="body">
+                    <form id="formEditProfile">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="editNip">NIP</label>
+                                <input type="text" id="editNip" class="input" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="editNamaLengkap">Nama Lengkap</label>
+                                <input type="text" id="editNamaLengkap" class="input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editJabatan">Jabatan</label>
+                                <input type="text" id="editJabatan" class="input" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="editDepartemen">Departemen</label>
+                                <input type="text" id="editDepartemen" class="input" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="editEmail">Email</label>
+                                <input type="email" id="editEmail" class="input">
+                            </div>
+                            <div class="form-group">
+                                <label for="editStatus">Status</label>
+                                <input type="text" id="editStatus" class="input" readonly>
+                            </div>
+                        </div>
+                        <div class="flex-justify-end" style="margin-top: 20px;">
+                            <button type="button" class="btn btn-secondary" id="btnResetEditProfile">Reset</button>
+                            <button type="submit" class="karyawan-btn karyawan-btn-primary">Simpan Perubahan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Ganti Password Card -->
+            <div class="card" id="gantiPasswordCard" style="display:none;">
+                <div class="hdr"><h3>Ubah Password</h3></div>
+                <div class="body">
+                    <form id="formChangePassword">
+                        <div class="form-group">
+                            <label for="current_password">Password Lama</label>
+                            <input type="password" id="current_password" class="input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new_password">Password Baru</label>
+                            <input type="password" id="new_password" class="input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_new_password">Konfirmasi Password Baru</label>
+                            <input type="password" id="confirm_new_password" class="input" required>
+                        </div>
+                        <div class="flex-justify-end" style="margin-top: 20px;">
+                            <button type="submit" class="karyawan-btn karyawan-btn-primary">Ubah Password</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  
+    <script src="../assets/js/common.js"></script>
+    <script src="../assets/js/hamburger-menu.js"></script>
+    <script src="../assets/js/karyawan-profile.js"></script>
+    </body></html>

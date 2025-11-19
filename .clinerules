@@ -1,0 +1,18 @@
+ignore:
+  - node_modules/
+  - vendor/
+  - storage/
+  - public/storage/
+  - bootstrap/cache/
+  - database/
+rules:
+  - Fokuskan analisis pada folder:
+    - resources/views/
+    - frontend/
+    - app/Http/Controllers/
+    - public/assets/js/
+  - Jangan ubah file .env atau config
+  - Jalankan php artisan serve untuk memastikan server aktif sebelum test
+  - Saat cek tombol dan input, pastikan event listener JavaScript terhubung dengan benar ke API di app/Http/Controllers
+  - Periksa error di console dan pastikan semua tombol navigasi dan submit form bekerja
+  - Gunakan bahasa Indonesia untuk laporan hasil analisis

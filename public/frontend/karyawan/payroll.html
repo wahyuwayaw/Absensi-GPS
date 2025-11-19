@@ -1,0 +1,38 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Karyawan | Payroll</title><link rel="stylesheet" href="../assets/css/av-ui.css"><link rel="stylesheet" href="../assets/css/mobile-responsive.css">
+  <link rel="stylesheet" href="../assets/css/mobile-fixes.css"></head><body class="body-pb-60">
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+            <button class="mobile-sidebar-close" id="closeSidebar">×</button>
+        </div>
+        <nav class="mobile-sidebar-nav">
+            <button class="btn-nav" onclick="location.href='index.html'">Dashboard</button>
+            <button class="btn-nav" onclick="location.href='absensi.html'">Absensi</button>
+            <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+            <button class="btn-nav" onclick="location.href='profile.html'">Profil</button>
+            <button class="btn-nav" id="btnLogout">Keluar</button>
+        </nav>
+    </div>
+<div class="header topbar">
+        <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+        <button class="hamburger-menu" id="hamburgerMenu"><span></span><span></span><span></span></button>
+        <div class="navlinks">
+            <button class="btn-nav" onclick="location.href='index.html'">Dashboard</button>
+            <button class="btn-nav" onclick="location.href='absensi.html'">Absensi</button>
+            <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+            <button class="btn-nav" onclick="location.href='profile.html'">Profil</button>
+            <button class="btn-nav" id="btnLogout">Keluar</button>
+        </div>
+      </div>
+<div class="container">
+  <div class="card"><h3>Slip Gaji Saya</h3>
+    <div class="form-grid"><div><label>Periode (YYYY-MM)</label><input class="input" id="month" placeholder="2025-01"></div>
+    <div class="flex-align-end"><button class="btn" id="btnLoad">Muat</button></div>
+    <div class="flex-align-end"><a class="btn btn-outline" id="btnSlip" target="_blank">Unduh Slip PDF</a></div></div>
+    <hr class="sep"><pre id="out" class="muted pre-wrap"></pre>
+  </div></div>
+<script src="../assets/js/common.js"></script>
+<script src="../assets/js/hamburger-menu.js"></script>
+<script src="../assets/js/karyawan-payroll.js"></script></body></html>

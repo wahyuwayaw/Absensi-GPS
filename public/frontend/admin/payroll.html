@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin | Penggajian</title>
+  <link rel="stylesheet" href="../assets/css/av-ui.css">
+  <link rel="stylesheet" href="../assets/css/mobile-responsive.css">
+  <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
+  <link rel="stylesheet" href="../assets/css/admin-consistent.css"></head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+            <button class="mobile-sidebar-close" id="closeSidebar">×</button>
+        </div>
+        <nav class="mobile-sidebar-nav">
+            <button class="btn-nav" onclick="location.href='index.html'">Dashboard</button>
+            <button class="btn-nav" onclick="location.href='absensi.html'">Absensi</button>
+            <button class="btn-nav" onclick="location.href='rekap.html'">Rekap Bulanan</button>
+            <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+            <button class="btn-nav" onclick="location.href='karyawan.html'">Karyawan</button>
+            <button class="btn-nav" onclick="location.href='lokasi.html'">Lokasi & Radius</button>
+            <button class="btn-nav active" onclick="location.href='payroll.html'">Penggajian</button>
+            <button class="btn-nav" onclick="location.href='settings.html'">Pengaturan</button>
+            <button class="btn-nav" id="btnLogout">Keluar</button>
+        </nav>
+    </div>
+    <div class="header topbar">
+        <div class="logo"><div class="dot"></div> ABSENCE <span class="muted">VERIFIED</span></div>
+        <button class="hamburger-menu" id="hamburgerMenu"><span></span><span></span><span></span></button>
+<div class="navlinks">
+            <button class="btn-nav" onclick="location.href='index.html'">Dashboard</button>
+            <button class="btn-nav" onclick="location.href='absensi.html'">Absensi</button>
+            <button class="btn-nav" onclick="location.href='rekap.html'">Rekap Bulanan</button>
+            <button class="btn-nav" onclick="location.href='permohonan.html'">Permohonan</button>
+            <button class="btn-nav" onclick="location.href='karyawan.html'">Karyawan</button>
+            <button class="btn-nav" onclick="location.href='lokasi.html'">Lokasi & Radius</button>
+            <button class="btn-nav active" onclick="location.href='payroll.html'">Penggajian</button>
+            <button class="btn-nav" onclick="location.href='settings.html'">Pengaturan</button>
+            <button class="btn-nav" id="btnLogout">Keluar</button>
+        </div>
+    </div>
+    
+    <div class="container admin-container">
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card admin-card">
+                <h3>Hitung & Generate Gaji Karyawan</h3>
+                <div class="flex-gap-15-align-end-mb-20">
+                    <div class="flex-1 form-group">
+                        <label for="karyawanSelect">Pilih Karyawan</label>
+                        <select class="input" id="karyawanSelect"></select>
+                    </div>
+                    <div class="width-150px form-group">
+                        <label for="bulanPayroll">Bulan</label>
+                        <select class="input" id="bulanPayroll">
+                            <option value="1">Januari</option>
+                            <option value="2">Februari</option>
+                            <option value="3">Maret</option>
+                            <option value="4">April</option>
+                            <option value="5">Mei</option>
+                            <option value="6">Juni</option>
+                            <option value="7">Juli</option>
+                            <option value="8">Agustus</option>
+                            <option value="9">September</option>
+                            <option value="10">Oktober</option>
+                            <option value="11">November</option>
+                            <option value="12">Desember</option>
+                        </select>
+                    </div>
+                    <div class="width-120px form-group">
+                        <label for="tahunPayroll">Tahun</label>
+                        <input class="input" type="number" id="tahunPayroll" value="2025" min="2020" max="2030">
+                    </div>
+                    <button class="admin-btn admin-btn-primary" id="btnCalculate">Hitung & Simpan Gaji</button>
+                </div>
+                
+                <div id="payrollResult" class="mt-20" style="display:none;">
+                    <h4>Detail Perhitungan Gaji</h4>
+                    <table class="av-table">
+                        <tbody id="payrollResultBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+<script src="../assets/js/common.js"></script>
+<script src="../assets/js/hamburger-menu.js"></script>
+<script src="../assets/js/admin.js"></script>
+<script src="../assets/js/admin-payroll.js"></script>
+<script src="../assets/js/av-table-pager.js"></script>
+</body>
+</html>
