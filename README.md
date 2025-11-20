@@ -35,8 +35,8 @@ Ikuti langkah-langkah berikut untuk menginstal dan menjalankan proyek ini di lin
 
 1.  **Clone Repository**
     ```bash
-    git clone <URL_REPOSITORY_ANDA>
-    cd absenv-final-clean
+    git clone https://github.com/wahyuwayaw/Absensi-GPS.git
+    cd Absensi-GPS
     ```
 
 2.  **Setup Backend (Laravel)**
